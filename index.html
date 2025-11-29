@@ -236,6 +236,11 @@
         .gold-glow {
             filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2));
         }
+        
+        /* Modal Transitions */
+        .modal-active {
+            display: flex !important;
+        }
 
     </style>
 </head>
@@ -248,7 +253,7 @@
                     <i data-lucide="crown" class="h-6 w-6 text-white"></i>
                     <span class="font-bold text-lg tracking-tight hidden sm:block">Life Premium™</span>
                 </div>
-                <a href="#cta" class="bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
+                <a href="#cta" class="open-modal-btn bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
                     Upgrade Now
                 </a>
             </div>
@@ -303,7 +308,7 @@
                             <p class="text-[#71767b] text-lg">Instant. Permanent. No questions.</p>
                         </div>
                
-                        <a href="#cta" class="cta-button">
+                        <a href="#cta" class="open-modal-btn cta-button">
                             UPGRADE MY LIFE NOW
                         </a>
                         <p class="mt-4 text-sm text-[#536471]">Cancel anytime (you won’t)</p>
@@ -354,18 +359,10 @@
 
                 </div>
 
-                <div id="cta" class="text-center relative py-24 rounded-3xl overflow-hidden border border-[#2f3336]/50 bg-[#16181c]/50">
-                    <canvas id="fireworksCanvasBottom" class="absolute inset-0 w-full h-full pointer-events-none opacity-50 z-0"></canvas>
-                    
-                    <div class="relative z-10 px-4">
-                        
-                        <h2 class="text-3xl font-bold text-white mb-8">Ready to ascend?</h2>
-                        
-                        <div class="max-w-md mx-auto bg-black/80 p-6 rounded-2xl border border-[#2f3336] shadow-2xl backdrop-blur-sm relative z-50">
-                           <div id="paypal-button-container" class="w-full min-h-[150px]"></div>
-                        </div>
-                        <p class="mt-4 text-xs text-[#536471]">Secure Payment via PayPal</p>
-                    </div>
+                <div class="text-center relative py-10">
+                     <a href="#cta" class="open-modal-btn cta-button">
+                        UPGRADE NOW
+                    </a>
                 </div>
 
                 <footer class="mt-20 text-center border-t border-[#2f3336] pt-10">
@@ -381,8 +378,58 @@
 
     </main>
 
+    <div id="paymentModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <div class="relative z-[101] bg-[#16181c] border border-[#2f3336] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl transform transition-all scale-100">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FFD400]/10 mb-4">
+                    <i data-lucide="lock" class="w-6 h-6 text-[#FFD400]"></i>
+                 </div>
+                 <h2 class="text-2xl font-bold text-white">Secure Upgrade</h2>
+                 <p class="text-[#71767b] text-sm mt-1">Life Premium™ Annual Plan ($89)</p>
+            </div>
+
+            <div id="paypal-button-container" class="w-full min-h-[150px] flex flex-col items-center justify-center bg-black/50 rounded-lg">
+                <span class="text-xs text-gray-500 animate-pulse">Loading secure payment...</span>
+            </div>
+            
+            <p class="mt-4 text-center text-xs text-[#536471]">Processed securely by PayPal.</p>
+        </div>
+    </div>
+
     <script>
         lucide.createIcons();
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('paymentModal');
+        const triggerButtons = document.querySelectorAll('.open-modal-btn');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        // Attach event listeners to all triggers
+        triggerButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
 
         // --- FIREWORKS ANIMATION ENGINE ---
         function initFireworks(canvasId) {
@@ -393,8 +440,6 @@
             let width, height;
             let particles = [];
             let fireworks = [];
-
-            // Colors: Gold, White, Silver, minimal Accent
             const colors = ['#FFD400', '#FFFFFF', '#E7E9EA', '#FFE033'];
 
             function resize() {
@@ -404,7 +449,6 @@
                 canvas.width = width;
                 canvas.height = height;
             }
-            
             window.addEventListener('resize', resize);
             resize();
 
@@ -413,7 +457,7 @@
                     this.x = Math.random() * width;
                     this.y = height;
                     this.targetX = Math.random() * width;
-                    this.targetY = Math.random() * (height * 0.4); // Explode in top 40%
+                    this.targetY = Math.random() * (height * 0.4); 
                     this.speed = 3 + Math.random() * 4;
                     this.angle = Math.atan2(this.targetY - this.y, this.targetX - this.x);
                     this.velocityX = Math.cos(this.angle) * this.speed;
@@ -422,21 +466,17 @@
                     this.targetRadius = 3;
                     this.exploded = false;
                 }
-
                 update(index) {
                     this.x += this.velocityX;
                     this.y += this.velocityY;
-
                     const dx = this.targetX - this.x;
                     const dy = this.targetY - this.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-
                     if (distance < this.speed) {
                         createParticles(this.targetX, this.targetY);
                         fireworks.splice(index, 1);
                     }
                 }
-
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
@@ -459,18 +499,15 @@
                     this.decay = Math.random() * 0.01 + 0.01;
                     this.color = colors[Math.floor(Math.random() * colors.length)];
                 }
-
                 update(index) {
                     this.speed *= this.friction;
                     this.x += Math.cos(this.angle) * this.speed;
                     this.y += Math.sin(this.angle) * this.speed + this.gravity;
                     this.alpha -= this.decay;
-
                     if (this.alpha <= 0) {
                         particles.splice(index, 1);
                     }
                 }
-
                 draw() {
                     ctx.globalAlpha = this.alpha;
                     ctx.beginPath();
@@ -493,40 +530,34 @@
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
                 ctx.fillRect(0, 0, width, height);
                 ctx.globalCompositeOperation = 'lighter';
-
                 if (Math.random() < 0.03) { 
                     fireworks.push(new Firework());
                 }
-
                 for (let i = fireworks.length - 1; i >= 0; i--) {
                     fireworks[i].update(i);
                     fireworks[i]?.draw();
                 }
-
                 for (let i = particles.length - 1; i >= 0; i--) {
                     particles[i].update(i);
                     particles[i]?.draw();
                 }
-
                 requestAnimationFrame(loop);
             }
-
             loop();
         }
 
-        // Initialize both instances
         initFireworks('fireworksCanvas');
-        initFireworks('fireworksCanvasBottom');
     </script>
 
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script>
-      // Wrapped in event listener to ensure SDK is fully ready
       window.addEventListener('load', function() {
           const container = document.getElementById('paypal-button-container');
           
           if (container && window.paypal) {
-              console.log("Rendering PayPal buttons...");
+              // Clear the 'Loading' text once PayPal is ready to render
+              container.innerHTML = ''; 
+              
               paypal.Buttons({
                 style: {
                     layout: 'vertical',
@@ -540,12 +571,9 @@
                 }),
                 onError: (err) => {
                     console.error("PayPal Error:", err);
+                    container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
                 }
-              }).render('#paypal-button-container').catch(err => {
-                  console.error("Failed to render buttons:", err);
-              });
-          } else {
-              console.error("PayPal Container or SDK not found");
+              }).render('#paypal-button-container');
           }
       });
     </script>
