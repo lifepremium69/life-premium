@@ -361,8 +361,8 @@
                         
                         <h2 class="text-3xl font-bold text-white mb-8">Ready to ascend?</h2>
                         
-                        <div class="max-w-md mx-auto bg-black/80 p-6 rounded-2xl border border-[#2f3336] shadow-2xl backdrop-blur-sm">
-                           <div id="paypal-button-container" class="w-full"></div>
+                        <div class="max-w-md mx-auto bg-black/80 p-6 rounded-2xl border border-[#2f3336] shadow-2xl backdrop-blur-sm relative z-50">
+                           <div id="paypal-button-container" class="w-full min-h-[150px]"></div>
                         </div>
                         <p class="mt-4 text-xs text-[#536471]">Secure Payment via PayPal</p>
                     </div>
@@ -519,26 +519,35 @@
         initFireworks('fireworksCanvasBottom');
     </script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script>
-      // Ensure the element exists before rendering
-      const container = document.getElementById('paypal-button-container');
-      if (container && window.paypal) {
-          paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color:  'gold',
-                shape:  'rect',
-                label:  'paypal'
-            },
-            createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
-            onApprove: (data, actions) => actions.order.capture().then(details => {
-              window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-            })
-          }).render('#paypal-button-container');
-      } else {
-          console.error("PayPal Container or SDK not found");
-      }
+      // Wrapped in event listener to ensure SDK is fully ready
+      window.addEventListener('load', function() {
+          const container = document.getElementById('paypal-button-container');
+          
+          if (container && window.paypal) {
+              console.log("Rendering PayPal buttons...");
+              paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color:  'gold',
+                    shape:  'rect',
+                    label:  'paypal'
+                },
+                createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
+                onApprove: (data, actions) => actions.order.capture().then(details => {
+                  window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+                }),
+                onError: (err) => {
+                    console.error("PayPal Error:", err);
+                }
+              }).render('#paypal-button-container').catch(err => {
+                  console.error("Failed to render buttons:", err);
+              });
+          } else {
+              console.error("PayPal Container or SDK not found");
+          }
+      });
     </script>
 </body>
 </html>
