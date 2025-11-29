@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Life Premium™ – Instant Life Upgrade</title>
     <meta name="description" content="Upgrade to Life Premium™ for just $89/year. Instant. Permanent. No questions." />
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -42,26 +44,29 @@
         ::-webkit-scrollbar {
             width: 10px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--x-black);
         }
+
         ::-webkit-scrollbar-thumb {
             background: #333;
             border-radius: 5px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
 
         /* --- PUNCHY SECTION STYLES --- */
-        
+
         .punchy-container {
             width: 100%;
         }
 
         .section-group {
             position: relative;
-            height: 100vh; 
+            height: 100vh;
             min-height: 600px;
             display: flex;
             align-items: center;
@@ -111,7 +116,7 @@
             pointer-events: auto;
             max-width: 1000px;
             width: 90%;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
             position: relative;
         }
 
@@ -123,8 +128,11 @@
             font-weight: 800;
             text-transform: uppercase;
         }
+
         @media (min-width: 768px) {
-            .punchy-title { font-size: 5rem; }
+            .punchy-title {
+                font-size: 5rem;
+            }
         }
 
         .punchy-subtitle {
@@ -134,8 +142,11 @@
             font-weight: 300;
             line-height: 1.5;
         }
+
         @media (min-width: 768px) {
-            .punchy-subtitle { font-size: 1.5rem; }
+            .punchy-subtitle {
+                font-size: 1.5rem;
+            }
         }
 
         .highlight {
@@ -171,8 +182,9 @@
         #section1 .layer--bg {
             background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);
         }
+
         #section1 .layer--deep-bg {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -182,7 +194,7 @@
         #section2 .layer--bg {
             background: radial-gradient(circle at 80% 20%, #2a2a2a, #050505);
         }
-        
+
         #section3 .layer--bg {
             background: radial-gradient(circle at center, #1a1a1a, #000000);
         }
@@ -194,6 +206,7 @@
             filter: blur(60px);
             opacity: 0.5;
         }
+
         .orb-1 {
             width: 300px;
             height: 300px;
@@ -202,6 +215,7 @@
             left: 10%;
             animation: floatOrb 10s infinite ease-in-out;
         }
+
         .orb-2 {
             width: 500px;
             height: 500px;
@@ -212,12 +226,20 @@
         }
 
         @keyframes floatOrb {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         /* Fireworks Canvas */
-        #fireworksCanvas, #fireworksCanvasBottom {
+        #fireworksCanvas,
+        #fireworksCanvasBottom {
             width: 100%;
             height: 100%;
             display: block;
@@ -225,10 +247,19 @@
 
         /* Floating Badge */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
+
         .floating-badge {
             animation: float 5s ease-in-out infinite;
         }
@@ -236,14 +267,14 @@
         .gold-glow {
             filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2));
         }
-        
+
         /* Modal Transitions */
         .modal-active {
             display: flex !important;
         }
-
     </style>
 </head>
+
 <body class="antialiased selection:bg-[#FFD400] selection:text-black">
 
     <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/70 border-b border-[#2f3336]">
@@ -253,7 +284,8 @@
                     <i data-lucide="crown" class="h-6 w-6 text-white"></i>
                     <span class="font-bold text-lg tracking-tight hidden sm:block">Life Premium™</span>
                 </div>
-                <a href="#cta" class="open-modal-btn bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
+                <a href="#cta"
+                    class="open-modal-btn bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
                     Upgrade Now
                 </a>
             </div>
@@ -298,16 +330,19 @@
                             <div class="floating-badge gold-glow">
                                 <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
                             </div>
-                            <div class="absolute inset-0 bg-[#FFD400] blur-[80px] opacity-10 pointer-events-none rounded-full transform scale-150"></div>
+                            <div
+                                class="absolute inset-0 bg-[#FFD400] blur-[80px] opacity-10 pointer-events-none rounded-full transform scale-150">
+                            </div>
                         </div>
 
-                        <h1 class="punchy-title">Life Premium™ <br><span class="highlight block mt-2 text-6xl">$89/year</span></h1>
-                        
+                        <h1 class="punchy-title">Life Premium™ <br><span
+                                class="highlight block mt-2 text-6xl">$89/year</span></h1>
+
                         <div class="punchy-subtitle mt-6 mb-8 text-[#e7e9ea]">
                             <p class="font-bold text-white mb-1">Pay → Life upgraded in 2.9 seconds.</p>
                             <p class="text-[#71767b] text-lg">Instant. Permanent. No questions.</p>
                         </div>
-               
+
                         <a href="#cta" class="open-modal-btn cta-button">
                             UPGRADE MY LIFE NOW
                         </a>
@@ -319,16 +354,18 @@
         </div>
 
         <div class="px-4 sm:px-6 pt-20 pb-20 normal-flow-group min-h-screen flex flex-col justify-center" id="features">
-            
+
             <div class="max-w-4xl mx-auto w-full">
                 <h2 class="text-3xl md:text-5xl font-extrabold mb-16 text-center text-white tracking-tight">
                     The second you click, <br><span class="text-[#FFD400]">this happens:</span>
                 </h2>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-                    
-                    <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
-                        <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
+
+                    <div
+                        class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="zap" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-3">Confidence</h3>
@@ -337,8 +374,10 @@
                         </p>
                     </div>
 
-                    <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
-                        <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
+                    <div
+                        class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="sparkles" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-3">Aura</h3>
@@ -347,8 +386,10 @@
                         </p>
                     </div>
 
-                    <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
-                        <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
+                    <div
+                        class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="infinity" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-3">Reality</h3>
@@ -360,7 +401,7 @@
                 </div>
 
                 <div class="text-center relative py-10">
-                     <a href="#cta" class="open-modal-btn cta-button">
+                    <a href="#cta" class="open-modal-btn cta-button">
                         UPGRADE NOW
                     </a>
                 </div>
@@ -380,24 +421,27 @@
 
     <div id="paymentModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        
-        <div class="relative z-[101] bg-[#16181c] border border-[#2f3336] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl transform transition-all scale-100">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+
+        <div
+            class="relative z-[101] bg-[#16181c] border border-[#2f3336] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl transform transition-all scale-100">
+            <button onclick="closeModal()"
+                class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-            
+
             <div class="text-center mb-6">
-                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FFD400]/10 mb-4">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FFD400]/10 mb-4">
                     <i data-lucide="lock" class="w-6 h-6 text-[#FFD400]"></i>
-                 </div>
-                 <h2 class="text-2xl font-bold text-white">Secure Upgrade</h2>
-                 <p class="text-[#71767b] text-sm mt-1">Life Premium™ Annual Plan ($89)</p>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Secure Upgrade</h2>
+                <p class="text-[#71767b] text-sm mt-1">Life Premium™ Annual Plan ($89)</p>
             </div>
 
-            <div id="paypal-button-container" class="w-full min-h-[150px] flex flex-col items-center justify-center bg-black/50 rounded-lg">
+            <div id="paypal-button-container"
+                class="w-full min-h-[150px] flex flex-col items-center justify-center bg-black/50 rounded-lg">
                 <span class="text-xs text-gray-500 animate-pulse">Loading secure payment...</span>
             </div>
-            
+
             <p class="mt-4 text-center text-xs text-[#536471]">Processed securely by PayPal.</p>
         </div>
     </div>
@@ -435,7 +479,7 @@
         function initFireworks(canvasId) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
-            
+
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
@@ -457,7 +501,7 @@
                     this.x = Math.random() * width;
                     this.y = height;
                     this.targetX = Math.random() * width;
-                    this.targetY = Math.random() * (height * 0.4); 
+                    this.targetY = Math.random() * (height * 0.4);
                     this.speed = 3 + Math.random() * 4;
                     this.angle = Math.atan2(this.targetY - this.y, this.targetX - this.x);
                     this.velocityX = Math.cos(this.angle) * this.speed;
@@ -519,7 +563,7 @@
             }
 
             function createParticles(x, y) {
-                const particleCount = 30; 
+                const particleCount = 30;
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle(x, y));
                 }
@@ -527,10 +571,10 @@
 
             function loop() {
                 ctx.globalCompositeOperation = 'destination-out';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
                 ctx.fillRect(0, 0, width, height);
                 ctx.globalCompositeOperation = 'lighter';
-                if (Math.random() < 0.03) { 
+                if (Math.random() < 0.03) {
                     fireworks.push(new Firework());
                 }
                 for (let i = fireworks.length - 1; i >= 0; i--) {
@@ -546,36 +590,39 @@
             loop();
         }
 
+        // Initialize both instances
         initFireworks('fireworksCanvas');
+        initFireworks('fireworksCanvasBottom');
     </script>
 
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script>
-      window.addEventListener('load', function() {
-          const container = document.getElementById('paypal-button-container');
-          
-          if (container && window.paypal) {
-              // Clear the 'Loading' text once PayPal is ready to render
-              container.innerHTML = ''; 
-              
-              paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color:  'gold',
-                    shape:  'rect',
-                    label:  'paypal'
-                },
-                createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
-                onApprove: (data, actions) => actions.order.capture().then(details => {
-                  window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-                }),
-                onError: (err) => {
-                    console.error("PayPal Error:", err);
-                    container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
-                }
-              }).render('#paypal-button-container');
-          }
-      });
+        window.addEventListener('load', function () {
+            const container = document.getElementById('paypal-button-container');
+
+            if (container && window.paypal) {
+                // Clear the 'Loading' text once PayPal is ready to render
+                container.innerHTML = '';
+
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'gold',
+                        shape: 'rect',
+                        label: 'paypal'
+                    },
+                    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
+                    onApprove: (data, actions) => actions.order.capture().then(details => {
+                        window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+                    }),
+                    onError: (err) => {
+                        console.error("PayPal Error:", err);
+                        container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
+                    }
+                }).render('#paypal-button-container');
+            }
+        });
     </script>
 </body>
+
 </html>
