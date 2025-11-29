@@ -318,12 +318,7 @@
                             <p class="font-bold text-white mb-1">Pay → Life upgraded in 2.9 seconds.</p>
                             <p class="text-[#71767b] text-lg">Instant. Permanent. No questions.</p>
                         </div>
-                        <div id="paypal-container-RHT8JWYXP8FQW"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "RHT8JWYXP8FQW",
-  }).render("#paypal-container-RHT8JWYXP8FQW")
-</script>
+              
                         <a href="#features" class="cta-button">
                             UPGRADE MY LIFE NOW
                         </a>
@@ -383,15 +378,17 @@
                 <div id="cta" class="text-center relative py-12 rounded-3xl overflow-hidden border border-[#2f3336]/50">
                     <canvas id="fireworksCanvasBottom" class="absolute inset-0 w-full h-full pointer-events-none opacity-50"></canvas>
                     <div class="relative z-10">
-                        <div id="paypal-container-RHT8JWYXP8FQW"></div>
+                        
+                       <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
+<div id="paypal-button"></div>
 <script>
-  paypal.HostedButtons({
-    hostedButtonId: "RHT8JWYXP8FQW",
-  }).render("#paypal-container-RHT8JWYXP8FQW")
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
+    onApprove: (data, actions) => actions.order.capture().then(details => {
+      window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+    })
+  }).render('#paypal-button');
 </script>
-                        <button class="w-full md:w-auto px-12 py-5 rounded-full bg-[#FFD400] text-black font-extrabold text-xl hover:bg-[#ffdf40] transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(255,212,0,0.3)]">
-                            Yes, Upgrade my life now
-                        </button>
                     </div>
                 </div>
 
