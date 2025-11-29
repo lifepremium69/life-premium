@@ -6,13 +6,10 @@
     <title>Life Premium™ – Instant Life Upgrade</title>
     <meta name="description" content="Upgrade to Life Premium™ for just $89/year. Instant. Permanent. No questions." />
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -245,16 +242,13 @@
 </head>
 <body class="antialiased selection:bg-[#FFD400] selection:text-black">
 
-    <!-- Sticky Header -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/70 border-b border-[#2f3336]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-14">
-                <!-- Logo -->
                 <div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition">
                     <i data-lucide="crown" class="h-6 w-6 text-white"></i>
                     <span class="font-bold text-lg tracking-tight hidden sm:block">Life Premium™</span>
                 </div>
-                <!-- Nav Action -->
                 <a href="#cta" class="bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
                     Upgrade Now
                 </a>
@@ -264,10 +258,8 @@
 
     <main class="w-full">
 
-        <!-- IMMERSIVE SCROLL SECTIONS -->
         <div class="punchy-container w-full">
 
-            <!-- SECTION 1 -->
             <div id="section1" class="section-group">
                 <div class="layer layer--deep-bg"></div>
                 <div class="layer layer--bg"></div>
@@ -279,7 +271,6 @@
                 </div>
             </div>
 
-            <!-- SECTION 2 -->
             <div id="section2" class="section-group">
                 <div class="layer layer--bg">
                     <div class="orb orb-1"></div>
@@ -293,15 +284,12 @@
                 </div>
             </div>
 
-            <!-- SECTION 3 (Pricing / CTA) -->
             <div id="section3" class="section-group">
                 <div class="layer layer--bg">
-                    <!-- Fireworks Background -->
                     <canvas id="fireworksCanvas"></canvas>
                 </div>
                 <div class="layer layer--content">
                     <div class="punchy-content">
-                        <!-- Floating Badge -->
                         <div class="flex justify-center mb-6 relative">
                             <div class="floating-badge gold-glow">
                                 <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
@@ -315,8 +303,8 @@
                             <p class="font-bold text-white mb-1">Pay → Life upgraded in 2.9 seconds.</p>
                             <p class="text-[#71767b] text-lg">Instant. Permanent. No questions.</p>
                         </div>
-              
-                        <a href="#features" class="cta-button">
+               
+                        <a href="#cta" class="cta-button">
                             UPGRADE MY LIFE NOW
                         </a>
                         <p class="mt-4 text-sm text-[#536471]">Cancel anytime (you won’t)</p>
@@ -326,7 +314,6 @@
 
         </div>
 
-        <!-- NORMAL SCROLL CONTENT -->
         <div class="px-4 sm:px-6 pt-20 pb-20 normal-flow-group min-h-screen flex flex-col justify-center" id="features">
             
             <div class="max-w-4xl mx-auto w-full">
@@ -336,7 +323,6 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
                     
-                    <!-- Confidence -->
                     <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
                         <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="zap" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
@@ -347,7 +333,6 @@
                         </p>
                     </div>
 
-                    <!-- Aura -->
                     <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
                         <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="sparkles" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
@@ -358,7 +343,6 @@
                         </p>
                     </div>
 
-                    <!-- Reality -->
                     <div class="bg-[#16181c] p-8 rounded-3xl border border-[#2f3336] hover:border-[#FFD400] transition-all group">
                         <div class="w-12 h-12 rounded-full bg-[#FFD400]/10 flex items-center justify-center mb-6 group-hover:bg-[#FFD400] transition-colors">
                             <i data-lucide="infinity" class="w-6 h-6 text-[#FFD400] group-hover:text-black"></i>
@@ -371,25 +355,28 @@
 
                 </div>
 
-                <!-- FINAL CTA -->
-                <div id="cta" class="text-center relative py-12 rounded-3xl overflow-hidden border border-[#2f3336]/50">
+                <div id="cta" class="text-center relative py-20 rounded-3xl overflow-hidden border border-[#2f3336]/50 bg-[#16181c]/50">
                     <canvas id="fireworksCanvasBottom" class="absolute inset-0 w-full h-full pointer-events-none opacity-50"></canvas>
-                    <div class="relative z-10">
+                    <div class="relative z-10 px-4">
                         
-                       <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
-<div id="paypal-button"></div>
-<script>
-  paypal.Buttons({
-    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
-    onApprove: (data, actions) => actions.order.capture().then(details => {
-      window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-    })
-  }).render('#paypal-button');
-</script>
+                        <h2 class="text-3xl font-bold text-white mb-6">Ready to ascend?</h2>
+                        
+                        <div class="max-w-md mx-auto bg-black/40 p-6 rounded-2xl border border-[#2f3336]">
+                            <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
+                            <div id="paypal-button"></div>
+                            <script>
+                              paypal.Buttons({
+                                createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
+                                onApprove: (data, actions) => actions.order.capture().then(details => {
+                                  window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+                                })
+                              }).render('#paypal-button');
+                            </script>
+                        </div>
+                        <p class="mt-4 text-xs text-[#536471]">Secure Payment via PayPal</p>
                     </div>
                 </div>
 
-                <!-- FOOTER -->
                 <footer class="mt-20 text-center border-t border-[#2f3336] pt-10">
                     <p class="text-[#536471] text-sm leading-relaxed max-w-xl mx-auto italic">
                         Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
