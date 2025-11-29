@@ -14,7 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    
     <style>
         :root {
             --x-black: #000000;
@@ -355,23 +354,15 @@
 
                 </div>
 
-                <div id="cta" class="text-center relative py-20 rounded-3xl overflow-hidden border border-[#2f3336]/50 bg-[#16181c]/50">
-                    <canvas id="fireworksCanvasBottom" class="absolute inset-0 w-full h-full pointer-events-none opacity-50"></canvas>
+                <div id="cta" class="text-center relative py-24 rounded-3xl overflow-hidden border border-[#2f3336]/50 bg-[#16181c]/50">
+                    <canvas id="fireworksCanvasBottom" class="absolute inset-0 w-full h-full pointer-events-none opacity-50 z-0"></canvas>
+                    
                     <div class="relative z-10 px-4">
                         
-                        <h2 class="text-3xl font-bold text-white mb-6">Ready to ascend?</h2>
+                        <h2 class="text-3xl font-bold text-white mb-8">Ready to ascend?</h2>
                         
-                        <div class="max-w-md mx-auto bg-black/40 p-6 rounded-2xl border border-[#2f3336]">
-                            <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
-                            <div id="paypal-button"></div>
-                            <script>
-                              paypal.Buttons({
-                                createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
-                                onApprove: (data, actions) => actions.order.capture().then(details => {
-                                  window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-                                })
-                              }).render('#paypal-button');
-                            </script>
+                        <div class="max-w-md mx-auto bg-black/80 p-6 rounded-2xl border border-[#2f3336] shadow-2xl backdrop-blur-sm">
+                           <div id="paypal-button-container" class="w-full"></div>
                         </div>
                         <p class="mt-4 text-xs text-[#536471]">Secure Payment via PayPal</p>
                     </div>
@@ -526,6 +517,28 @@
         // Initialize both instances
         initFireworks('fireworksCanvas');
         initFireworks('fireworksCanvasBottom');
+    </script>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AbSU0AZJiTZ5zAGOp9pSXzp3i8Ival4B2JkFz8qzwspBto3-YI2uhr-PIgebv-rUIZJR8FplzpY9j52i&currency=USD"></script>
+    <script>
+      // Ensure the element exists before rendering
+      const container = document.getElementById('paypal-button-container');
+      if (container && window.paypal) {
+          paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color:  'gold',
+                shape:  'rect',
+                label:  'paypal'
+            },
+            createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
+            onApprove: (data, actions) => actions.order.capture().then(details => {
+              window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+            })
+          }).render('#paypal-button-container');
+      } else {
+          console.error("PayPal Container or SDK not found");
+      }
     </script>
 </body>
 </html>
