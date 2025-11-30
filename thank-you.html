@@ -236,13 +236,8 @@
 
                 <div class="cert-footer">
                     <div class="cert-logo">
-                        <svg width="24" height="24" viewBox="0 0 100 100" fill="#daa520"
-                            xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
-                            <rect x="10" y="35" width="20" height="45" />
-                            <rect x="40" y="15" width="20" height="65" />
-                            <rect x="70" y="35" width="20" height="45" />
-                            <rect x="10" y="85" width="80" height="10" />
-                        </svg>
+                        <img src="logo.png" alt="Life Premium Logo"
+                            style="width: 32px; height: auto; margin-right: 8px;">
                         Life Premium™
                     </div>
                     <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">Authentic & Irreversible</div>
@@ -422,6 +417,19 @@
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             }).catch(err => console.error("Certificate generation failed:", err));
+        }
+
+        // --- URL PARAMETER PARSING ---
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const userName = getQueryParam('name');
+        if (userName) {
+            // Decode and format the name (replace + with space if needed, though URLSearchParams handles mostly)
+            const formattedName = userName.replace(/\+/g, ' ');
+            document.querySelector('.cert-name').textContent = formattedName;
         }
 
         // Start
