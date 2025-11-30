@@ -31,7 +31,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--x-black);
             color: var(--x-text-main);
-            overflow-x: hidden; /* Allow vertical scroll on small screens */
+            overflow-x: hidden;
             overflow-y: auto;
             margin: 0;
             padding: 0;
@@ -59,7 +59,9 @@
             text-align: center;
             width: 100%;
             max-width: 900px;
-            padding: 20px;
+            /* Added padding-left/right to ensure it doesn't touch screen edges on mobile */
+            padding: 20px; 
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -75,21 +77,23 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        @media (min-width: 768px) {
-            .loading-text { font-size: 2rem; }
-        }
 
         .loading-text.active {
             opacity: 1;
         }
 
-        /* Certificate Container */
+        /* --- CERTIFICATE RESPONSIVE LOGIC --- 
+           We use 'container-type' so children can size themselves 
+           based on the parent width (cqi units).
+        */
         #certificate-wrapper {
             display: none;
             flex-direction: column;
             align-items: center;
             animation: fadeIn 1s ease-out;
             width: 100%;
+            /* This defines the container for query units */
+            container-type: inline-size; 
         }
 
         @keyframes fadeIn {
@@ -97,59 +101,65 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* The Certificate Element to Capture */
+        /* The Certificate Element */
         #certificate-node {
             width: 100%;
-            max-width: 800px; /* Maximum desktop width */
-            aspect-ratio: 4/3; /* Maintain aspect ratio */
+            /* Caps the width on desktop so it doesn't get huge */
+            max-width: 800px; 
+            /* Forces a Landscape Aspect Ratio */
+            aspect-ratio: 1.4 / 1; 
+            
             background-color: #fffaf0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             position: relative;
             color: #1a1a1a;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 5%; /* Responsive padding */
-            border: 8px solid #D4AF37;
-            outline: 4px solid #fffaf0;
-            outline-offset: -20px;
             box-sizing: border-box;
+
+            /* SCALABLE UNITS (cqi = container query inline size)
+               1cqi = 1% of the container width. 
+               This ensures exact scaling on all screens.
+            */
+            padding: 5cqi;
+            border: 1cqi solid #D4AF37; 
+            outline: 0.5cqi solid #fffaf0;
+            outline-offset: -2.5cqi;
         }
 
         /* Inner decorative border */
         #certificate-node::after {
             content: '';
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border: 4px solid #D4AF37;
+            top: 2cqi;
+            left: 2cqi;
+            right: 2cqi;
+            bottom: 2cqi;
+            border: 0.5cqi solid #D4AF37;
             pointer-events: none;
-        }
-        @media (max-width: 640px) {
-            #certificate-node { border-width: 4px; outline-offset: -10px; }
-            #certificate-node::after { top: 8px; left: 8px; right: 8px; bottom: 8px; border-width: 2px; }
         }
 
         .cert-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive Font Size */
+            /* Scales perfectly with width */
+            font-size: 5.5cqi; 
             font-weight: 700;
             letter-spacing: 0.05em;
             color: #D4AF37;
-            margin-bottom: 5px;
+            margin-bottom: 0.5cqi;
             text-transform: uppercase;
             line-height: 1.1;
         }
 
         .cert-subtitle {
-            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            font-size: 2.2cqi;
             color: #555;
-            margin-bottom: clamp(20px, 5vw, 40px);
+            margin-bottom: 4cqi;
             font-weight: 500;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -157,13 +167,12 @@
 
         .cert-name {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 6vw, 4rem); /* Responsive Name */
+            font-size: 7cqi;
             color: #000;
-            margin: 10px 0 20px 0;
-            border-bottom: 4px solid #D4AF37;
-            padding-bottom: 10px;
+            margin: 1cqi 0 3cqi 0;
+            border-bottom: 0.5cqi solid #D4AF37;
+            padding-bottom: 1cqi;
             width: 80%;
-            max-width: 500px;
             word-wrap: break-word;
         }
 
@@ -172,47 +181,52 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 1cqi;
         }
 
         .cert-logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 1cqi;
             font-weight: 700;
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-size: 2.5cqi;
             color: #333;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
+        /* Buttons */
         .action-area {
             margin-top: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
+            width: 100%;
         }
 
         .download-btn {
             background-color: var(--x-gold);
             color: #000;
             font-weight: 700;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 9999px;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             font-size: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(255, 212, 0, 0.3);
+            width: 100%;
+            max-width: 300px;
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 0 20px rgba(255, 212, 0, 0.6);
             background-color: #ffe033;
         }
@@ -235,11 +249,13 @@
     <canvas id="fireworksCanvas"></canvas>
 
     <div class="content-container">
+        
         <div id="loading-container">
             <div id="loading-text" class="loading-text active">Upgrading your DNA… 37%</div>
         </div>
 
         <div id="certificate-wrapper">
+            
             <div id="certificate-node">
                 <div class="cert-title">Certificate of Premium Human™</div>
                 <div class="cert-subtitle">Officially Recognized As</div>
@@ -248,10 +264,10 @@
 
                 <div class="cert-footer">
                     <div class="cert-logo">
-                        <i data-lucide="crown" style="width: 24px; height: 24px; color: #D4AF37;"></i>
+                        <i data-lucide="crown" style="width: 3cqi; height: 3cqi; color: #D4AF37;"></i>
                         Life Premium™
                     </div>
-                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">Authentic & Irreversible</div>
+                    <div style="font-size: 1.8cqi; color: #888; margin-top: 0.5cqi;">Authentic & Irreversible</div>
                 </div>
             </div>
 
@@ -403,30 +419,59 @@
                 colors: ['#FFD400', '#FFFFFF', '#FFA500']
             });
             
-            // Auto download on first show
             setTimeout(downloadCertificate, 1500);
         }
 
+        // --- DOWNLOAD LOGIC ---
         function downloadCertificate() {
             const node = document.getElementById('certificate-node');
 
-            // Force a fixed width for capture so text doesn't wrap weirdly during image generation
-            // We clone the node style for the capture
+            // IMPORTANT: We clone the node inside html2canvas to FORCE desktop sizes
+            // This ensures the downloaded image is High Res (Desktop quality)
+            // even if the user is on a tiny mobile screen.
             html2canvas(node, {
                 scale: 2, 
                 backgroundColor: null,
                 useCORS: true,
                 onclone: (clonedDoc) => {
-                    // Ensure the cloned certificate has desktop-like proportions for the image
                     const clonedNode = clonedDoc.getElementById('certificate-node');
+                    
+                    // Force Desktop Size for the Image Generation
                     clonedNode.style.width = '800px';
                     clonedNode.style.height = '600px';
-                    clonedNode.style.maxWidth = 'none';
-                    // Reset font sizes in clone to ensure consistency
+                    clonedNode.style.aspectRatio = 'auto'; // Disable aspect ratio lock for fixed size
+                    
+                    // Reset styling to use pixels instead of percentage (cqi)
+                    // This ensures the text looks correct in the large PNG
+                    clonedNode.style.padding = '40px';
+                    clonedNode.style.borderWidth = '8px';
+                    clonedNode.style.outlineWidth = '4px';
+                    clonedNode.style.outlineOffset = '-20px';
+
+                    // Fix Font Sizes for the High Res Image
                     const title = clonedNode.querySelector('.cert-title');
-                    if(title) title.style.fontSize = '3rem';
+                    title.style.fontSize = '48px'; 
+                    title.style.marginBottom = '10px';
+
+                    const subtitle = clonedNode.querySelector('.cert-subtitle');
+                    subtitle.style.fontSize = '20px';
+                    subtitle.style.marginBottom = '30px';
+
                     const name = clonedNode.querySelector('.cert-name');
-                    if(name) name.style.fontSize = '4rem';
+                    name.style.fontSize = '64px';
+                    name.style.margin = '20px 0';
+                    name.style.borderBottomWidth = '4px';
+                    
+                    const logo = clonedNode.querySelector('.cert-logo');
+                    logo.style.fontSize = '20px';
+                    const logoIcon = logo.querySelector('svg'); // Lucide renders as svg
+                    if(logoIcon) {
+                        logoIcon.style.width = '24px';
+                        logoIcon.style.height = '24px';
+                    }
+                    
+                    const footerText = clonedNode.querySelector('.cert-footer div:last-child');
+                    footerText.style.fontSize = '14px';
                 }
             }).then(canvas => {
                 const link = document.createElement('a');
@@ -448,7 +493,6 @@
             document.querySelector('.cert-name').textContent = formattedName;
         }
 
-        // Start
         runSequence();
 
     </script>
