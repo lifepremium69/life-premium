@@ -594,10 +594,13 @@
                         });
                     },
                     onApprove: (data, actions) => actions.order.capture().then(details => {
-                        console.log('Payment approved:', details);
-                        const redirectUrl = `./thank-you.html?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-                        console.log('Redirecting to:', redirectUrl);
-                        window.location.href = redirectUrl;
+                    console.log('Payment approved:', details);
+    
+                    // FIX: Added ".html" to the filename
+                    const redirectUrl = `/thank-you.html?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+    
+                    console.log('Redirecting to:', redirectUrl);
+                    window.location.href = redirectUrl;
                     }),
                     onError: (err) => {
                         console.error("PayPal Error:", err);
