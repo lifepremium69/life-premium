@@ -564,33 +564,44 @@
         initFireworks('fireworksCanvasBottom');
     </script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script>
-        window.addEventListener('load', function () {
-            const container = document.getElementById('paypal-button-container');
-
-            if (container && window.paypal) {
-                // Clear the 'Loading' text once PayPal is ready to render
-                container.innerHTML = '';
-
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'gold',
-                        shape: 'rect',
-                        label: 'paypal'
-                    },
-                    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
-                    onApprove: (data, actions) => actions.order.capture().then(details => {
-                        window.location.href = `thank-you.html?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-                    }),
-                    onError: (err) => {
-                        console.error("PayPal Error:", err);
-                        container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
-                    }
-                }).render('#paypal-button-container');
-            }
-        });
+      window.addEventListener('load', function() {
+          const container = document.getElementById('paypal-button-container');
+          
+          if (container && window.paypal) {
+              container.innerHTML = ''; 
+              
+              paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color:  'gold',
+                    shape:  'rect',
+                    label:  'paypal'
+                },
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        application_context: {
+                            // THIS REMOVES THE SHIPPING ADDRESS FIELDS
+                            shipping_preference: "NO_SHIPPING",
+                            brand_name: "Life Premium Inc."
+                        },
+                        purchase_units: [{
+                            amount: { value: '89' },
+                            description: "Life Premium - Annual Upgrade" 
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => actions.order.capture().then(details => {
+                  window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+                }),
+                onError: (err) => {
+                    console.error("PayPal Error:", err);
+                    container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
+                }
+              }).render('#paypal-button-container');
+          }
+      });
     </script>
 </body>
 
