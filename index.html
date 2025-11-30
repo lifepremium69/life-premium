@@ -272,6 +272,11 @@
         .modal-active {
             display: flex !important;
         }
+
+        /* CTA Section */
+        #cta {
+            scroll-margin-top: 2rem;
+        }
     </style>
 </head>
 
@@ -285,7 +290,7 @@
                     <span class="font-bold text-lg tracking-tight hidden sm:block">Life Premium™</span>
                 </div>
                 <a href="#cta"
-                    class="open-modal-btn bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
+                    class="bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#FFD400] transition-colors">
                     Upgrade Now
                 </a>
             </div>
@@ -343,7 +348,7 @@
                             <p class="text-[#71767b] text-lg">Instant. Permanent. No questions.</p>
                         </div>
 
-                        <a href="#cta" class="open-modal-btn cta-button">
+                        <a href="#cta" class="cta-button">
                             UPGRADE MY LIFE NOW
                         </a>
                         <p class="mt-4 text-sm text-[#536471]">Cancel anytime (you won’t)</p>
@@ -400,10 +405,24 @@
 
                 </div>
 
-                <div class="text-center relative py-10">
-                    <a href="#cta" class="open-modal-btn cta-button">
-                        UPGRADE NOW
-                    </a>
+                <div class="text-center relative py-10" id="cta">
+                    <div class="max-w-md mx-auto bg-[#16181c] border border-[#2f3336] rounded-2xl p-8 shadow-2xl">
+                        <div class="text-center mb-6">
+                            <div
+                                class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FFD400]/10 mb-4">
+                                <i data-lucide="lock" class="w-6 h-6 text-[#FFD400]"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">Secure Upgrade</h2>
+                            <p class="text-[#71767b] text-sm mt-1">Life Premium™ Annual Plan ($89)</p>
+                        </div>
+
+                        <div id="paypal-button-container"
+                            class="w-full min-h-[150px] flex flex-col items-center justify-center bg-black/50 rounded-lg">
+                            <span class="text-xs text-gray-500 animate-pulse">Loading secure payment...</span>
+                        </div>
+
+                        <p class="mt-4 text-center text-xs text-[#536471]">Processed securely by PayPal.</p>
+                    </div>
                 </div>
 
                 <footer class="mt-20 text-center border-t border-[#2f3336] pt-10">
@@ -419,61 +438,11 @@
 
     </main>
 
-    <div id="paymentModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-
-        <div
-            class="relative z-[101] bg-[#16181c] border border-[#2f3336] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl transform transition-all scale-100">
-            <button onclick="closeModal()"
-                class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FFD400]/10 mb-4">
-                    <i data-lucide="lock" class="w-6 h-6 text-[#FFD400]"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-white">Secure Upgrade</h2>
-                <p class="text-[#71767b] text-sm mt-1">Life Premium™ Annual Plan ($89)</p>
-            </div>
-
-            <div id="paypal-button-container"
-                class="w-full min-h-[150px] flex flex-col items-center justify-center bg-black/50 rounded-lg">
-                <span class="text-xs text-gray-500 animate-pulse">Loading secure payment...</span>
-            </div>
-
-            <p class="mt-4 text-center text-xs text-[#536471]">Processed securely by PayPal.</p>
-        </div>
-    </div>
 
     <script>
         lucide.createIcons();
 
-        // --- MODAL LOGIC ---
-        const modal = document.getElementById('paymentModal');
-        const triggerButtons = document.querySelectorAll('.open-modal-btn');
-
-        function openModal() {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            // Restore body scroll
-            document.body.style.overflow = 'auto';
-        }
-
-        // Attach event listeners to all triggers
-        triggerButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal();
-            });
-        });
+        // --- MODAL LOGIC REMOVED ---
 
         // --- FIREWORKS ANIMATION ENGINE ---
         function initFireworks(canvasId) {
@@ -595,7 +564,7 @@
         initFireworks('fireworksCanvasBottom');
     </script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AYEnOhhKLJPw7karBIvUPfpnXcXOxaUuMlCcRV4gbMsG0I0GMohjNiCSyMlTAwMGVWa8qJCqXfq-vu0f&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script>
         window.addEventListener('load', function () {
             const container = document.getElementById('paypal-button-container');
@@ -613,7 +582,7 @@
                     },
                     createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '89' } }] }),
                     onApprove: (data, actions) => actions.order.capture().then(details => {
-                        window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
+                        window.location.href = `thank-you.html?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
                     }),
                     onError: (err) => {
                         console.error("PayPal Error:", err);
