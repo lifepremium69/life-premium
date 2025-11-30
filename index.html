@@ -615,11 +615,12 @@ lifepremium.you
                         }]
                     });
                 },
-                onApprove: (data, actions) => actions.order.capture().then(details => {
-                  // --- THE FIX IS HERE ---
-                  // We explicitly add .html to the URL
-                  window.location.href = `thank-you.html?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}`;
-                }),
+               onApprove: (data, actions) => actions.order.capture().then(details => {
+              const refId = new URLSearchParams(window.location.search).get('ref_id') || ''; // From referral link
+              // Store ref in sessionStorage for thank-you
+              sessionStorage.setItem('ref_id', refId);
+              window.location.href = `/thank-you?name=${details.payer.name.given_name}+${details.payer.name.surname}&orderid=${data.orderID}&ref_id=${refId}`;
+            })
                 onError: (err) => {
                     console.error("PayPal Error:", err);
                     container.innerHTML = '<p class="text-red-500 text-sm">Payment system unavailable.</p>';
