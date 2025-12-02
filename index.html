@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-NC59DJ9CPD');
+    gtag('config', 'G-NC59DJ9CPD');
+  </script> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Life Premium™ – Instant Upgrade</title>
   <meta name="description" content="Pay once. Life upgraded. Instantly. No badge. No waiting. Just pure premium." />
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
   <style>
     :root { --gold: #FFD400; }
     body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
     html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
     .snap { scroll-snap-align: start; }
+    /* Your original H1 styling */
     h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; font-weight: 800; }
     @media (min-width: 768px) { h1 { font-size: 6.5rem; } }
     .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
@@ -28,25 +31,21 @@
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
   </style>
 
-  <!-- Crossmint mint button (non-transferable NFT) -->
   <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
 
 </head>
 <body class="antialiased">
 
-  <!-- SECTION 1 -->
   <section class="h-screen snap flex flex-col items-center justify-center text-center px-6">
     <h1 class="glow">Still living<br><span class="text-gray-600">average?</span></h1>
     <p class="mt-8 text-xl text-gray-400">One payment ends that forever.</p>
   </section>
 
-  <!-- SECTION 2 -->
   <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black to-[#111]">
     <h1 class="glow">Upgrade your life<br><span class="text-[#FFD400]">to Premium.</span></h1>
     <p class="mt-8 text-2xl">No badge. No approval. No waiting.</p>
   </section>
 
-  <!-- SECTION 3 – INSTANT UPGRADE -->
   <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-t from-[#FFD400]/5 to-transparent"></div>
     <div class="relative z-10">
@@ -55,13 +54,12 @@
         <span class="text-6xl md:text-8xl text-[#FFD400] instant">$89</span><span class="text-3xl"> once</span>
       </h1>
       
-      <div class="my-12 text-xl text-gray-300 max-w-2xl">
+      <div class="my-12 text-xl text-gray-300 max-w-2xl mx-auto">
         Pay once → Life upgraded forever.<br>
         <span class="text-[#FFD400] font-bold">Includes permanent, non-transferable on-chain certificate.</span><br>
         Valid forever. Secured on Solana. Cannot be sold or faked.
       </div>
 
-      <!-- Main mint button -->
       <crossmint-embedded-collect
         clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
         collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
@@ -82,96 +80,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="py-20 text-center text-gray-600 text-sm">
-    Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
-    But the certificate is now on-chain, non-transferable, and yours forever.<br>
-    © 2025 Instant Life Corp. Still above the peasants™
-  <!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Life Premium™ – Instant Upgrade</title>
-  <meta name="description" content="Pay once. Life upgraded. Instantly. No badge. No waiting. Just pure premium." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --gold: #FFD400; }
-    body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-    .snap { scroll-snap-align: start; }
-    h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; font-weight: 800; }
-    @media (min-width: 768px) { h1 { font-size: 6.5rem; } }
-    .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
-    .instant { animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
-  </style>
-
-  <!-- Crossmint mint button (non-transferable NFT) -->
-  <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
-</head>
-<body class="antialiased">
-
-  <!-- SECTION 1 -->
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6">
-    <h1 class="glow">Still living<br><span class="text-gray-600">average?</span></h1>
-    <p class="mt-8 text-xl text-gray-400">One payment ends that forever.</p>
-  </section>
-
-  <!-- SECTION 2 -->
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black to-[#111]">
-    <h1 class="glow">Upgrade your life<br><span class="text-[#FFD400]">to Premium.</span></h1>
-    <p class="mt-8 text-2xl">No badge. No approval. No waiting.</p>
-  </section>
-
-  <!-- SECTION 3 – INSTANT UPGRADE -->
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD400]/5 to-transparent"></div>
-    <div class="relative z-10">
-      <h1 class="glow mb-8">
-        Life Premium™<br>
-        <span class="text-6xl md:text-8xl text-[#FFD400] instant">$89</span><span class="text-3xl"> once</span>
-      </h1>
-      
-      <div class="my-12 text-xl text-gray-300 max-w-2xl">
-        Pay once → Life upgraded forever.<br>
-        <span class="text-[#FFD400] font-bold">Includes permanent, non-transferable on-chain certificate.</span><br>
-        Valid forever. Secured on Solana. Cannot be sold or faked.
-      </div>
-
-      <!-- Main mint button -->
-      <crossmint-embedded-collect
-        clientId="YOUR_CLIENT_ID"
-        collectionId="YOUR_COLLECTION_ID"
-        environment="production"
-        price="0.42"
-        currency="SOL"
-        paymentMethods='["fiat","sol"]'
-        emailInput="true"
-        successRedirectUrl="https://lifepremium.you/thank-you"
-        class="w-full max-w-md mx-auto"
-      >
-        <button class="w-full px-16 py-6 bg-[#FFD400] text-black text-2xl font-black rounded-full hover:scale-105 transform transition shadow-2xl shadow-[#FFD400]/30">
-          UPGRADE MY LIFE NOW
-        </button>
-      </crossmint-embedded-collect>
-
-      <p class="mt-10 text-gray-500 text-sm">One payment. No renewal. Ever.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer class="py-20 text-center text-gray-600 text-sm">
     Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
     But the certificate is now on-chain, non-transferable, and yours forever.<br>
     © 2025 Instant Life Corp. Still above the peasants™
   </footer>
-
-  <script>lucide.createIcons();</script>
-</body>
-</html></footer>
 
   <script>lucide.createIcons();</script>
 </body>
