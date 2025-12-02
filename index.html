@@ -1,90 +1,337 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-NC59DJ9CPD');
-  </script> 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Life Premium™ – Instant Upgrade</title>
-  <meta name="description" content="Pay once. Life upgraded. Instantly. No badge. No waiting. Just pure premium." />
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  
-  <style>
-    :root { --gold: #FFD400; }
-    body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-    .snap { scroll-snap-align: start; }
-    h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; font-weight: 800; }
-    @media (min-width: 768px) { h1 { font-size: 6.5rem; } }
-    .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
-    .instant { animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
-  </style>
+        gtag('config', 'G-NC59DJ9CPD');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Premium™ – Instant Life Upgrade</title>
+    <meta name="description" content="Upgrade to Life Premium™ for just $89/year. Instant. Permanent. No questions." />
 
-  <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --x-black: #000000;
+            --x-card-bg: #16181c;
+            --x-gold: #FFD400;
+            --x-text-main: #e7e9ea;
+            --x-text-dim: #71767b;
+            --x-border: #2f3336;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--x-black);
+            color: var(--x-text-main);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- VISUAL FX --- */
+        .section-group {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .layer {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+        }
+
+        .layer--content {
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        
+        /* Allow clicks on buttons inside the content layer */
+        .layer--content * {
+            pointer-events: auto;
+        }
+
+        .layer--bg { z-index: 5; }
+        .layer--deep-bg { z-index: 1; }
+
+        /* Typography */
+        .punchy-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 90%;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .punchy-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin: 0 0 1.5rem 0;
+            letter-spacing: -2px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        @media (min-width: 768px) {
+            .punchy-title { font-size: 5rem; }
+        }
+
+        .punchy-subtitle {
+            font-size: 1.25rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .highlight { color: var(--x-gold); }
+
+        /* --- THE GOLD BUTTON --- */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--x-gold);
+            color: #000;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            margin-top: 10px;
+            border-radius: 9999px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            background-color: #ffe033;
+        }
+
+        /* FX: Orbs & Fireworks */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+        .orb-1 {
+            width: 300px; height: 300px; background: var(--x-gold);
+            top: 10%; left: 10%; animation: floatOrb 10s infinite ease-in-out;
+        }
+        .orb-2 {
+            width: 500px; height: 500px; background: #800080;
+            bottom: -10%; right: -10%; animation: floatOrb 14s infinite ease-in-out reverse;
+        }
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        #fireworksCanvas { width: 100%; height: 100%; display: block; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-badge { animation: float 5s ease-in-out infinite; }
+        .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
+    </style>
 </head>
-<body class="antialiased">
 
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6">
-    <h1 class="glow">Still living<br><span class="text-gray-600">average?</span></h1>
-    <p class="mt-8 text-xl text-gray-400">One payment ends that forever.</p>
-  </section>
+<body class="antialiased selection:bg-[#FFD400] selection:text-black">
 
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black to-[#111]">
-    <h1 class="glow">Upgrade your life<br><span class="text-[#FFD400]">to Premium.</span></h1>
-    <p class="mt-8 text-2xl">No badge. No approval. No waiting.</p>
-  </section>
+    <main class="w-full">
 
-  <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD400]/5 to-transparent"></div>
-    <div class="relative z-10">
-      <h1 class="glow mb-8">
-        Life Premium™<br>
-        <span class="text-6xl md:text-8xl text-[#FFD400] instant">$89</span><span class="text-3xl"> once</span>
-      </h1>
-      
-      <div class="my-12 text-xl text-gray-300 max-w-2xl mx-auto">
-        Pay once → Life upgraded forever.<br>
-        <span class="text-[#FFD400] font-bold">Includes permanent, non-transferable on-chain certificate.</span><br>
-        Valid forever. Secured on Solana. Cannot be sold or faked.
-      </div>
+        <div id="section1" class="section-group">
+            <div class="layer layer--deep-bg" style="background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);"></div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <h1 class="punchy-title">Still living <br><span style="color:#666">average?</span></h1>
+                    <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
+                    
+                    <crossmint-embedded-collect
+                        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
+                        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
+                        environment="production"
+                        price="0.42"
+                        currency="SOL"
+                        paymentMethods='["fiat","sol"]'
+                        emailInput="true"
+                        successRedirectUrl="https://lifepremium.you/thank-you"
+                    >
+                        <button class="cta-button" style="background: transparent; border: 2px solid #FFD400; color: #FFD400;">
+                            Start Upgrade
+                        </button>
+                    </crossmint-embedded-collect>
+                </div>
+            </div>
+        </div>
 
-      <crossmint-embedded-collect
-        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
-        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
-        environment="production"
-        price="0.42"
-        currency="SOL"
-        paymentMethods='["fiat","sol"]'
-        emailInput="true"
-        successRedirectUrl="https://lifepremium.you/thank-you"
-        class="w-full max-w-md mx-auto block"
-      >
-        <button class="w-full px-16 py-6 bg-[#FFD400] text-black text-2xl font-black rounded-full hover:scale-105 transform transition shadow-2xl shadow-[#FFD400]/30 cursor-pointer">
-          UPGRADE MY LIFE NOW
-        </button>
-      </crossmint-embedded-collect>
+        <div id="section2" class="section-group">
+            <div class="layer layer--bg" style="background: radial-gradient(circle at 80% 20%, #2a2a2a, #050505);">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <h1 class="punchy-title">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
+                    <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
+                </div>
+            </div>
+        </div>
 
-      <p class="mt-10 text-gray-500 text-sm">One payment. No renewal. Ever.</p>
-    </div>
-  </section>
+        <div id="section3" class="section-group">
+            <div class="layer layer--bg" style="background: #000;">
+                <canvas id="fireworksCanvas"></canvas>
+            </div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <div class="flex justify-center mb-6 relative">
+                        <div class="floating-badge gold-glow">
+                            <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
+                        </div>
+                    </div>
 
-  <footer class="py-20 text-center text-gray-600 text-sm">
-    Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
-    But the certificate is now on-chain, non-transferable, and yours forever.<br>
-    © 2025 Instant Life Corp. Still above the peasants™
-  </footer>
+                    <h1 class="punchy-title" style="font-size: 6rem; color: white;">$89</h1>
+                    <div class="text-2xl font-bold text-[#FFD400] mb-6 uppercase tracking-widest">ONCE</div>
 
-  <script>lucide.createIcons();</script>
+                    <div class="punchy-subtitle mt-6 mb-8 text-[#e7e9ea]">
+                        <p class="font-bold text-white mb-1">Pay Once → Life upgraded forever.</p>
+                        <p class="text-[#71767b] text-lg">Includes permanent, non-transferable on-chain certificate.</p>
+                    </div>
+
+                    <crossmint-embedded-collect
+                        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
+                        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
+                        environment="production"
+                        price="0.42"
+                        currency="SOL"
+                        paymentMethods='["fiat","sol"]'
+                        emailInput="true"
+                        successRedirectUrl="https://lifepremium.you/thank-you"
+                        class="block w-full"
+                    >
+                        <button class="cta-button">
+                            UPGRADE MY LIFE NOW
+                        </button>
+                    </crossmint-embedded-collect>
+
+                    <p class="mt-4 text-sm text-[#536471]">Valid forever. Non-transferable. Yours only.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // --- FIREWORKS ANIMATION ENGINE ---
+        function initFireworks() {
+            const canvas = document.getElementById('fireworksCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [], fireworks = [];
+            
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Firework {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = height;
+                    this.tx = Math.random() * width;
+                    this.ty = Math.random() * (height * 0.5);
+                    this.speed = 5;
+                    this.angle = Math.atan2(this.ty - this.y, this.tx - this.x);
+                    this.vx = Math.cos(this.angle) * this.speed;
+                    this.vy = Math.sin(this.angle) * this.speed;
+                }
+                update(i) {
+                    this.x += this.vx; this.y += this.vy;
+                    if (Math.abs(this.tx - this.x) < 5 && Math.abs(this.ty - this.y) < 5) {
+                        createParticles(this.x, this.y);
+                        fireworks.splice(i, 1);
+                    }
+                }
+                draw() { ctx.fillStyle = '#FFD400'; ctx.fillRect(this.x, this.y, 3, 3); }
+            }
+
+            function createParticles(x, y) {
+                for (let i = 0; i < 30; i++) {
+                    particles.push({
+                        x, y,
+                        vx: (Math.random() - 0.5) * 6,
+                        vy: (Math.random() - 0.5) * 6,
+                        alpha: 1,
+                        color: `hsl(${Math.random() * 50 + 40}, 100%, 50%)`
+                    });
+                }
+            }
+
+            function loop() {
+                requestAnimationFrame(loop);
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.globalCompositeOperation = 'lighter';
+
+                if (Math.random() < 0.03) fireworks.push(new Firework());
+
+                fireworks.forEach((f, i) => { f.update(i); f.draw(); });
+                
+                particles.forEach((p, i) => {
+                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.02;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, 2, 2);
+                    if (p.alpha <= 0) particles.splice(i, 1);
+                });
+            }
+            loop();
+        }
+        initFireworks();
+    </script>
 </body>
 </html>
