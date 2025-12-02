@@ -172,6 +172,29 @@
         }
         .floating-badge { animation: float 5s ease-in-out infinite; }
         .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
+
+        /* Scroll Down Indicator */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11; /* Above content, below fireworks */
+            color: #FFD400; /* Gold arrow */
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
     </style>
 </head>
 
@@ -185,8 +208,10 @@
                 <div class="punchy-content">
                     <h1 class="punchy-title glow">Still living <br><span style="color:#666">average?</span></h1>
                     <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
-                    
-                    </div>
+                </div>
+            </div>
+            <div class="scroll-down-indicator">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
             </div>
         </div>
 
@@ -200,6 +225,9 @@
                     <h1 class="punchy-title glow">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
                     <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
                 </div>
+            </div>
+            <div class="scroll-down-indicator">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
             </div>
         </div>
 
