@@ -84,7 +84,7 @@
         .layer--bg { z-index: 5; }
         .layer--deep-bg { z-index: 1; }
 
-        /* Typography & Headers (Increased Specificity Fix) */
+        /* Typography */
         .punchy-content {
             text-align: center;
             padding: 2rem;
@@ -94,7 +94,7 @@
             position: relative;
         }
         
-        /* THIS FIXES THE HEADER RENDERING PROBLEM */
+        /* HEADER FIX */
         .punchy-title {
             font-size: 4.5rem; /* Your mobile/base size */
             line-height: 1.1;
@@ -107,7 +107,6 @@
         @media (min-width: 768px) {
             .punchy-title { font-size: 6.5rem; } /* Your desktop size */
         }
-        /* END OF HEADER FIX */
 
         .punchy-subtitle {
             font-size: 1.25rem;
@@ -187,21 +186,7 @@
                     <h1 class="punchy-title glow">Still living <br><span style="color:#666">average?</span></h1>
                     <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
                     
-                    <crossmint-embedded-collect
-                        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
-                        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
-                        environment="production"
-                        price="0.42"
-                        currency="SOL"
-                        paymentMethods='["fiat","sol"]'
-                        emailInput="true"
-                        successRedirectUrl="https://lifepremium.you/thank-you"
-                    >
-                        <button class="cta-button" style="background: transparent; border: 2px solid #FFD400; color: #FFD400;">
-                            Start Upgrade
-                        </button>
-                    </crossmint-embedded-collect>
-                </div>
+                    </div>
             </div>
         </div>
 
@@ -229,6 +214,8 @@
                             <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
                         </div>
                     </div>
+                    
+                    <h2 class="text-3xl font-bold text-white mb-4 uppercase tracking-widest">Life Premium™</h2>
 
                     <h1 class="punchy-title" style="font-size: 6rem; color: white;">$89</h1>
                     <div class="text-2xl font-bold text-[#FFD400] mb-6 uppercase tracking-widest">ONCE</div>
@@ -270,7 +257,7 @@
     <script>
         lucide.createIcons();
 
-        // --- FIREWORKS ANIMATION ENGINE (Provided for completeness) ---
+        // --- FIREWORKS ANIMATION ENGINE ---
         function initFireworks() {
             const canvas = document.getElementById('fireworksCanvas');
             if (!canvas) return;
