@@ -94,9 +94,9 @@
             position: relative;
         }
         
-        /* HEADER FIX */
+        /* HEADER FIX: Matching text-5xl and md:text-7xl sizes */
         .punchy-title {
-            font-size: 4.5rem; /* Your mobile/base size */
+            font-size: 3rem; /* text-5xl equivalent */
             line-height: 1.1;
             letter-spacing: -3px;
             font-weight: 800;
@@ -105,7 +105,7 @@
         }
 
         @media (min-width: 768px) {
-            .punchy-title { font-size: 6.5rem; } /* Your desktop size */
+            .punchy-title { font-size: 4.5rem; } /* text-7xl equivalent */
         }
 
         .punchy-subtitle {
@@ -170,7 +170,7 @@
             50% { transform: translateY(-12px); }
             100% { transform: translateY(0px); }
         }
-        .floating-badge { animation: float 5s ease-in-out infinite; }
+        .floating-badge { animation: float 5s infinite; }
         .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
 
         /* Scroll Down Indicator */
@@ -179,8 +179,8 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 11; /* Above content, below fireworks */
-            color: #FFD400; /* Gold arrow */
+            z-index: 11;
+            color: #FFD400;
             animation: bounce 2s infinite;
         }
 
@@ -245,7 +245,7 @@
                     
                     <h2 class="text-3xl font-bold text-white mb-4 uppercase tracking-widest">Life Premium™</h2>
 
-                    <h1 class="punchy-title" style="font-size: 6rem; color: white;">$89</h1>
+                    <h1 class="punchy-title" style="color: white;">$89</h1>
                     <div class="text-2xl font-bold text-[#FFD400] mb-6 uppercase tracking-widest">ONCE</div>
 
                     <div class="punchy-subtitle mt-6 mb-8 text-[#e7e9ea]">
