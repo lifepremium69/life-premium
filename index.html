@@ -23,7 +23,6 @@
     body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
     html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
     .snap { scroll-snap-align: start; }
-    /* Your original H1 styling */
     h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; font-weight: 800; }
     @media (min-width: 768px) { h1 { font-size: 6.5rem; } }
     .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
@@ -48,7 +47,7 @@
 
   <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-t from-[#FFD400]/5 to-transparent"></div>
-    <div class="relative z-10">
+    <div class="relative z-10 w-full max-w-4xl mx-auto">
       <h1 class="glow mb-8">
         Life Premium™<br>
         <span class="text-6xl md:text-8xl text-[#FFD400] instant">$89</span><span class="text-3xl"> once</span>
@@ -69,7 +68,7 @@
         paymentMethods='["fiat","sol"]'
         emailInput="true"
         successRedirectUrl="https://lifepremium.you/thank-you"
-        class="w-full max-w-md mx-auto"
+        class="w-full max-w-md mx-auto block"
       >
         <button class="w-full px-16 py-6 bg-[#FFD400] text-black text-2xl font-black rounded-full hover:scale-105 transform transition shadow-2xl shadow-[#FFD400]/30">
           UPGRADE MY LIFE NOW
