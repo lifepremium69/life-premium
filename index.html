@@ -23,7 +23,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -77,7 +77,6 @@
             pointer-events: none;
         }
         
-        /* Allow clicks on buttons inside the content layer */
         .layer--content * {
             pointer-events: auto;
         }
@@ -85,7 +84,7 @@
         .layer--bg { z-index: 5; }
         .layer--deep-bg { z-index: 1; }
 
-        /* Typography */
+        /* Typography & Headers (Increased Specificity Fix) */
         .punchy-content {
             text-align: center;
             padding: 2rem;
@@ -94,19 +93,21 @@
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
             position: relative;
         }
-
+        
+        /* THIS FIXES THE HEADER RENDERING PROBLEM */
         .punchy-title {
-            font-size: 3.5rem;
+            font-size: 4.5rem; /* Your mobile/base size */
             line-height: 1.1;
-            margin: 0 0 1.5rem 0;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
             font-weight: 800;
             text-transform: uppercase;
+            margin: 0 0 1.5rem 0;
         }
 
         @media (min-width: 768px) {
-            .punchy-title { font-size: 5rem; }
+            .punchy-title { font-size: 6.5rem; } /* Your desktop size */
         }
+        /* END OF HEADER FIX */
 
         .punchy-subtitle {
             font-size: 1.25rem;
@@ -183,7 +184,7 @@
             <div class="layer layer--deep-bg" style="background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);"></div>
             <div class="layer layer--content">
                 <div class="punchy-content">
-                    <h1 class="punchy-title">Still living <br><span style="color:#666">average?</span></h1>
+                    <h1 class="punchy-title glow">Still living <br><span style="color:#666">average?</span></h1>
                     <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
                     
                     <crossmint-embedded-collect
@@ -211,7 +212,7 @@
             </div>
             <div class="layer layer--content">
                 <div class="punchy-content">
-                    <h1 class="punchy-title">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
+                    <h1 class="punchy-title glow">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
                     <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
                 </div>
             </div>
@@ -260,10 +261,16 @@
 
     </main>
 
+    <footer class="py-20 text-center text-gray-600 text-sm border-t border-[#222] bg-[#111]">
+        Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
+        But the certificate is now on-chain, non-transferable, and yours forever.<br>
+        © 2025 Instant Life Corp. Still above the peasants™
+    </footer>
+
     <script>
         lucide.createIcons();
 
-        // --- FIREWORKS ANIMATION ENGINE ---
+        // --- FIREWORKS ANIMATION ENGINE (Provided for completeness) ---
         function initFireworks() {
             const canvas = document.getElementById('fireworksCanvas');
             if (!canvas) return;
