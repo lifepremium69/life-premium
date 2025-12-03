@@ -7,21 +7,17 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-NC59DJ9CPD');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Premium™ – Instant Life Upgrade</title>
-    <meta name="description" content="Upgrade to Life Premium™ for just $89/year. Instant. Permanent. No questions." />
+    <title>Upgrade Successful | Life Premium™</title>
+    
+    <script async src="https://go.firstpromoter.com/fpr.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
@@ -34,237 +30,138 @@
             --x-border: #2f3336;
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Disable scroll on body, force it on wrapper */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--x-black);
             color: var(--x-text-main);
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* --- THE MAGIC SCROLL WRAPPER --- */
-        .snap-container {
+            overflow: hidden; 
             height: 100vh;
-            width: 100%;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .section-group {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            width: 100%;
+            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            overflow: hidden;
-        }
-
-        /* Footer needs to be snap-aligned too if it's visible */
-        footer {
-            scroll-snap-align: start;
         }
 
         /* --- VISUAL FX --- */
-        .layer {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
-        }
+        .layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; }
+        .layer--content { z-index: 10; position: relative; text-align: center; }
+        .layer--bg { z-index: 1; }
 
-        .layer--content {
-            z-index: 10;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            pointer-events: none;
-        }
-        
-        .layer--content * {
-            pointer-events: auto !important;
-        }
-
-        .layer--bg { z-index: 5; }
-        .layer--deep-bg { z-index: 1; }
-
-        /* Typography */
-        .punchy-content {
-            text-align: center;
-            padding: 2rem;
-            max-width: 1000px;
-            width: 90%;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-            position: relative;
-        }
-        
+        /* Typography matching index.html */
         .punchy-title {
-            font-size: 3rem; 
+            font-size: 3rem;
             line-height: 1.1;
             letter-spacing: -3px;
             font-weight: 800;
             text-transform: uppercase;
             margin: 0 0 1.5rem 0;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
         @media (min-width: 768px) {
-            .punchy-title { font-size: 4.5rem; } 
+            .punchy-title { font-size: 5rem; }
         }
 
         .punchy-subtitle {
             font-size: 1.25rem;
             color: #ddd;
-            margin-bottom: 2rem;
             font-weight: 300;
             line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
         }
 
-        .highlight { color: var(--x-gold); }
-
+        /* Gold Button */
         .cta-button {
             display: inline-block;
             padding: 18px 40px;
-            background: var(--x-gold);
-            color: #000;
+            background: transparent;
+            border: 2px solid var(--x-gold);
+            color: var(--x-gold);
             font-weight: 900;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
-            border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
             border-radius: 9999px;
         }
 
         .cta-button:hover {
+            background: var(--x-gold);
+            color: #000;
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-            background-color: #ffe033;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
         }
 
-        .orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; }
-        .orb-1 { width: 300px; height: 300px; background: var(--x-gold); top: 10%; left: 10%; animation: floatOrb 10s infinite ease-in-out; }
-        .orb-2 { width: 500px; height: 500px; background: #800080; bottom: -10%; right: -10%; animation: floatOrb 14s infinite ease-in-out reverse; }
-        @keyframes floatOrb { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
+        /* Animations */
         #fireworksCanvas { width: 100%; height: 100%; display: block; }
-
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
-        .floating-badge { animation: float 5s infinite; }
-        .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
-
-        .scroll-down-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 11;
-            color: #FFD400;
-            animation: bounce 2s infinite;
-            cursor: pointer;
+        .gold-glow { filter: drop-shadow(0 0 30px rgba(255, 212, 0, 0.4)); }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
+        .floating-badge { animation: float 4s ease-in-out infinite; }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
     </style>
 </head>
 
 <body class="antialiased selection:bg-[#FFD400] selection:text-black">
 
-    <div class="snap-container">
+    <div class="layer layer--bg">
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
 
-        <div id="section1" class="section-group">
-            <div class="layer layer--deep-bg" style="background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);"></div>
-            <div class="layer layer--content">
-                <div class="punchy-content">
-                    <h1 class="punchy-title glow">Still living <br><span style="color:#666">average?</span></h1>
-                    <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
-                </div>
-            </div>
-            <div class="scroll-down-indicator" onclick="document.getElementById('section2').scrollIntoView({behavior: 'smooth'})">
-                <i data-lucide="chevron-down" class="w-10 h-10"></i>
+    <div class="layer--content p-6">
+        
+        <div class="flex justify-center mb-8 relative">
+            <div class="floating-badge gold-glow">
+                <i data-lucide="check-circle" class="w-24 h-24 text-[#FFD400]"></i>
             </div>
         </div>
 
-        <div id="section2" class="section-group">
-            <div class="layer layer--bg" style="background: radial-gradient(circle at 80% 20%, #2a2a2a, #050505);">
-                <div class="orb orb-1"></div>
-                <div class="orb orb-2"></div>
-            </div>
-            <div class="layer layer--content">
-                <div class="punchy-content">
-                    <h1 class="punchy-title glow">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
-                    <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
-                </div>
-            </div>
-            <div class="scroll-down-indicator" onclick="document.getElementById('section3').scrollIntoView({behavior: 'smooth'})">
-                <i data-lucide="chevron-down" class="w-10 h-10"></i>
-            </div>
+        <h1 class="punchy-title">Welcome to <br><span style="color:var(--x-gold)">Premium.</span></h1>
+
+        <div class="punchy-subtitle">
+            <p class="font-bold text-white mb-2">Status Upgrade: Confirmed.</p>
+            <p class="text-[#71767b]">Your unique NFT Certificate is being minted and airdropped to your wallet right now. It usually takes 1-2 minutes.</p>
         </div>
 
-        <div id="section3" class="section-group">
-            <div class="layer layer--bg" style="background: #000;">
-                <canvas id="fireworksCanvas"></canvas>
-            </div>
-            <div class="layer layer--content">
-                <div class="punchy-content">
-                    <div class="flex justify-center mb-6 relative">
-                        <div class="floating-badge gold-glow">
-                            <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
-                        </div>
-                    </div>
-                    
-                    <h2 class="text-3xl font-bold text-white mb-4 uppercase tracking-widest">Life Premium™</h2>
+        <a href="/" class="cta-button">
+            Return to Homepage
+        </a>
 
-                    <h1 class="punchy-title" style="color: white;">$89</h1>
-                    <div class="text-2xl font-bold text-[#FFD400] mb-6 uppercase tracking-widest">ONCE</div>
+        <p class="mt-8 text-sm text-[#536471]">Check your email for the Crossmint receipt.</p>
+    </div>
 
-                    <div class="punchy-subtitle mt-6 mb-8 text-[#e7e9ea]">
-                        <p class="font-bold text-white mb-1">Pay Once → Life upgraded forever.</p>
-                        <p class="text-[#71767b] text-lg">Includes permanent, non-transferable on-chain certificate.</p>
-                    </div>
+    <script>
+        window.$FPROM = window.$FPROM || { cmd: [] };
+        
+        $FPROM.cmd.push(function(api) {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('orderId'); // Crossmint order ID
+            const refId = params.get('ref_id');   // Affiliate ID we preserved
 
-                    <crossmint-embedded-collect
-                        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
-                        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
-                        environment="production"
-                        price="0.42"
-                        currency="SOL"
-                        paymentMethods='["fiat","sol"]'
-                        emailInput="true"
-                        successRedirectUrl="https://lifepremium.you/thank-you"
-                        class="block w-full"
-                    >
-                        <button class="cta-button">
-                            UPGRADE MY LIFE NOW
-                        </button>
-                    </crossmint-embedded-collect>
-
-                    <p class="mt-4 text-sm text-[#536471]">Valid forever. Non-transferable. Yours only.</p>
-                </div>
-            </div>
-        </div>
-
-        <footer class="py-20 text-center text-gray-600 text-sm border-t border-[#222] bg-[#111]">
-            Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
-            But the certificate is now on-chain, non-transferable, and yours forever.<br>
-            © 2025 Instant Life Corp. Still above the peasants™
-        </footer>
-
-    </div> <script>
+            // Fire sale event ONLY if we have confirmation (orderId) and an affiliate ID (refId)
+            if (refId && orderId) {
+                api.trackSale({
+                    sale_amount: 89, 
+                    currency: 'USD',
+                    customer_ref: orderId, // Unique transaction reference
+                    promoter_ref: refId     // Affiliate identifier
+                });
+                console.log(`First Promoter Sale Tracked for affiliate ${refId}`);
+            }
+        });
+    </script>
+    
+    <script>
         lucide.createIcons();
 
+        // --- FIREWORKS ANIMATION (Same as Index) ---
         function initFireworks() {
             const canvas = document.getElementById('fireworksCanvas');
             if (!canvas) return;
@@ -283,7 +180,7 @@
                     this.x = Math.random() * width;
                     this.y = height;
                     this.tx = Math.random() * width;
-                    this.ty = Math.random() * (height * 0.5);
+                    this.ty = Math.random() * (height * 0.4);
                     this.speed = 5;
                     this.angle = Math.atan2(this.ty - this.y, this.tx - this.x);
                     this.vx = Math.cos(this.angle) * this.speed;
@@ -300,11 +197,11 @@
             }
 
             function createParticles(x, y) {
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 40; i++) { 
                     particles.push({
                         x, y,
-                        vx: (Math.random() - 0.5) * 6,
-                        vy: (Math.random() - 0.5) * 6,
+                        vx: (Math.random() - 0.5) * 8,
+                        vy: (Math.random() - 0.5) * 8,
                         alpha: 1,
                         color: `hsl(${Math.random() * 50 + 40}, 100%, 50%)`
                     });
@@ -318,12 +215,12 @@
                 ctx.fillRect(0, 0, width, height);
                 ctx.globalCompositeOperation = 'lighter';
 
-                if (Math.random() < 0.03) fireworks.push(new Firework());
+                if (Math.random() < 0.05) fireworks.push(new Firework()); 
 
                 fireworks.forEach((f, i) => { f.update(i); f.draw(); });
                 
                 particles.forEach((p, i) => {
-                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.02;
+                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.015;
                     ctx.globalAlpha = p.alpha;
                     ctx.fillStyle = p.color;
                     ctx.fillRect(p.x, p.y, 2, 2);
@@ -334,30 +231,5 @@
         }
         initFireworks();
     </script>
-    <script>
-    // --- AFFILIATE TRACKING SETUP: Preserving ref_id through checkout ---
-    
-    // 1. Get the affiliate ID (ref_id) from the URL if present
-    const params = new URLSearchParams(window.location.search);
-    const refId = params.get('ref_id'); 
-
-    // 2. Define the base success URL (Must be the full URL)
-    let redirectUrl = "https://lifepremium.you/thank-you.html";
-    
-    // 3. If an affiliate ID is found, append it to the redirect URL
-    if (refId) {
-        // We ensure ref_id is added to the URL parameters
-        redirectUrl += (redirectUrl.includes('?') ? '&' : '?') + `ref_id=${refId}`;
-    }
-
-    // 4. Find all Crossmint elements and set the dynamic redirect URL
-    document.addEventListener('DOMContentLoaded', () => {
-        const crossmintButtons = document.querySelectorAll('crossmint-embedded-collect');
-        crossmintButtons.forEach(button => {
-            // This overwrites the static URL in the HTML, ensuring the ref_id is carried over
-            button.setAttribute('successRedirectUrl', redirectUrl);
-        });
-    });
-</script>
 </body>
 </html>
