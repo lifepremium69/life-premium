@@ -1,50 +1,91 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-NC59DJ9CPD');
-    </script> 
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Premium™ – Instant Upgrade</title>
-    <meta name="description" content="Pay once. Life upgraded. Instantly. No badge. No waiting. Just pure premium." />
+    <title>Life Premium™ – Instant Life Upgrade</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
-        :root { --gold: #FFD400; }
-        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; margin: 0; }
-        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-        .snap { scroll-snap-align: start; }
-        h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; font-weight: 800; }
-        @media (min-width: 768px) { h1 { font-size: 6.5rem; } }
+        :root { --gold: #FFD400; --black: #000000; }
+        body { background-color: var(--black); color: #e7e9ea; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        /* --- TYPOGRAPHY --- */
+        .punchy-title {
+            font-size: 3.5rem; line-height: 1.1; letter-spacing: -3px; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) { .punchy-title { font-size: 6rem; } }
+        
+        .punchy-subtitle { font-size: 1.25rem; color: #ddd; font-weight: 300; margin-bottom: 2rem; }
+        .highlight { color: var(--gold); }
+
+        /* --- BUTTONS --- */
+        .cta-button {
+            display: inline-block; padding: 18px 40px; background: var(--gold); color: #000; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 1px; border-radius: 9999px; transition: transform 0.2s;
+            border: none; cursor: pointer;
+        }
+        .cta-button:hover { transform: scale(1.05); background-color: #ffe033; }
+
+        /* --- FX LAYERS --- */
+        .section-group { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .layer { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+        .layer--content { z-index: 10; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .layer--content * { pointer-events: auto; }
+        .punchy-content { text-align: center; position: relative; max-width: 1000px; padding: 2rem; z-index: 20; }
+
+        /* --- VISUALS --- */
         .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
-        .instant { animation: pulse 1.8s infinite; }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; }
+        .orb-1 { width: 300px; height: 300px; background: var(--gold); top: 10%; left: 10%; animation: floatOrb 10s infinite ease-in-out; }
+        .orb-2 { width: 500px; height: 500px; background: #800080; bottom: -10%; right: -10%; animation: floatOrb 14s infinite reverse; }
+        @keyframes floatOrb { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        
+        #fireworksCanvas { width: 100%; height: 100%; }
+        .floating-badge { animation: float 5s infinite; filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+        /* --- MODAL FIXES --- */
+        /* Forces the modal content to have height so Crossmint can render */
+        .crossmint-container { min-height: 650px; display: block; width: 100%; }
     </style>
 </head>
-<body class="antialiased">
 
-    <div id="paymentModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
-        <div class="relative w-full max-w-md bg-[#16181c] border border-[#333] rounded-2xl overflow-hidden shadow-2xl p-6">
-            <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white z-20">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
+<body class="antialiased selection:bg-[#FFD400] selection:text-black">
+
+    <div id="paymentModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
+        <div class="relative w-full max-w-md bg-[#16181c] border border-[#333] rounded-2xl shadow-2xl overflow-hidden">
             
-            <div class="mt-4">
+            <div class="flex justify-between items-center p-4 border-b border-[#333] bg-[#111]">
+                <span class="text-[#FFD400] font-bold tracking-widest uppercase text-sm">Secure Checkout</span>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="crossmint-container bg-white"> 
                 <crossmint-embedded-collect
                     id="crossmint-widget"
                     clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
                     collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
-                    environment="staging" 
+                    environment="staging"
                     price="0.42"
                     currency="SOL"
                     paymentMethods='["fiat","sol"]'
@@ -55,40 +96,72 @@
         </div>
     </div>
 
-    <section class="h-screen snap flex flex-col items-center justify-center text-center px-6">
-        <h1 class="glow">Still living<br><span class="text-gray-600">average?</span></h1>
-        <p class="mt-8 text-xl text-gray-400">One payment ends that forever.</p>
-    </section>
+    <main class="w-full">
 
-    <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black to-[#111]">
-        <h1 class="glow">Upgrade your life<br><span class="text-[#FFD400]">to Premium.</span></h1>
-        <p class="mt-8 text-2xl">No badge. No approval. No waiting.</p>
-    </section>
-
-    <section class="h-screen snap flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#FFD400]/5 to-transparent"></div>
-        <div class="relative z-10">
-            <h1 class="glow mb-8">
-                Life Premium™<br>
-                <span class="text-6xl md:text-8xl text-[#FFD400] instant">$89</span><span class="text-3xl"> once</span>
-            </h1>
-            
-            <div class="my-12 text-xl text-gray-300 max-w-2xl mx-auto">
-                Pay once → Life upgraded forever.<br>
-                <span class="text-[#FFD400] font-bold">Includes permanent, non-transferable on-chain certificate.</span><br>
-                Valid forever. Secured on Solana. Cannot be sold or faked.
+        <div id="section1" class="section-group">
+            <div class="layer layer--bg" style="background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);"></div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <h1 class="punchy-title glow">Still living <br><span style="color:#666">average?</span></h1>
+                    <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
+                </div>
             </div>
-
-            <button onclick="openModal()" 
-                class="w-full max-w-md px-16 py-6 bg-[#FFD400] text-black text-2xl font-black rounded-full hover:scale-105 transform transition shadow-2xl shadow-[#FFD400]/30 cursor-pointer">
-                UPGRADE MY LIFE NOW
+            <button onclick="document.getElementById('section2').scrollIntoView({behavior:'smooth'})" 
+                class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#FFD400] animate-bounce z-20">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
             </button>
-
-            <p class="mt-10 text-gray-500 text-sm">One payment. No renewal. Ever.</p>
         </div>
-    </section>
 
-    <footer class="py-20 text-center text-gray-600 text-sm snap">
+        <div id="section2" class="section-group">
+            <div class="layer layer--bg" style="background: radial-gradient(circle at 80% 20%, #2a2a2a, #050505);">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <h1 class="punchy-title glow">Upgrade your life <br><span class="highlight">to Premium.</span></h1>
+                    <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('section3').scrollIntoView({behavior:'smooth'})" 
+                class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#FFD400] animate-bounce z-20">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
+            </button>
+        </div>
+
+        <div id="section3" class="section-group">
+            <div class="layer layer--bg" style="background: #000;">
+                <canvas id="fireworksCanvas"></canvas>
+            </div>
+            <div class="layer layer--content">
+                <div class="punchy-content">
+                    <div class="flex justify-center mb-6 relative">
+                        <div class="floating-badge gold-glow">
+                            <i data-lucide="crown" class="w-20 h-20 text-[#FFD400]"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl font-bold text-white mb-4 uppercase tracking-widest">Life Premium™</h2>
+                    <h1 class="punchy-title" style="font-size: 6rem; color: white;">$89</h1>
+                    <div class="text-2xl font-bold text-[#FFD400] mb-6 uppercase tracking-widest">ONCE</div>
+
+                    <div class="punchy-subtitle mt-6 mb-8 text-[#e7e9ea]">
+                        <p class="font-bold text-white mb-1">Pay Once → Life upgraded forever.</p>
+                        <p class="text-[#71767b] text-lg">Includes permanent, non-transferable on-chain certificate.</p>
+                    </div>
+
+                    <button onclick="openModal()" class="cta-button w-full max-w-md">
+                        UPGRADE MY LIFE NOW
+                    </button>
+
+                    <p class="mt-4 text-sm text-[#536471]">Valid forever. Non-transferable. Yours only.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="py-12 text-center text-gray-600 text-xs bg-[#111] border-t border-[#222]">
         Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
         But the certificate is now on-chain, non-transferable, and yours forever.<br>
         © 2025 Instant Life Corp. Still above the peasants™
@@ -97,34 +170,57 @@
     <script>
         lucide.createIcons();
 
-        // --- MODAL & AFFILIATE LOGIC ---
+        // --- MODAL & TRACKING LOGIC ---
         function openModal() {
-            document.getElementById('paymentModal').classList.remove('hidden');
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('hidden');
+            
+            // 1. Get Ref ID
+            const params = new URLSearchParams(window.location.search);
+            const refId = params.get('ref_id');
+            
+            // 2. Build Success URL dynamically
+            let successUrl = "https://lifepremium.you/thank-you";
+            if (refId) successUrl += `?ref_id=${refId}`;
+
+            // 3. Inject into Widget (Critical Step)
+            const widget = document.getElementById('crossmint-widget');
+            if(widget) widget.setAttribute('successRedirectUrl', successUrl);
         }
+
         function closeModal() {
             document.getElementById('paymentModal').classList.add('hidden');
         }
 
-        // Close on click outside
+        // Close on outside click
         window.onclick = function(event) {
-            const modal = document.getElementById('paymentModal');
-            if (event.target == modal) { closeModal(); }
+            if (event.target == document.getElementById('paymentModal')) closeModal();
         }
 
-        // 1. Get Ref ID from URL
-        const params = new URLSearchParams(window.location.search);
-        const refId = params.get('ref_id');
-        
-        // 2. Build Success URL
-        let successUrl = "https://lifepremium.you/thank-you"; // Removed .html if using clean URLs, add back if needed
-        if (refId) {
-            successUrl += `?ref_id=${refId}`;
-        }
-
-        // 3. Inject into Widget
-        const widget = document.getElementById('crossmint-widget');
-        if(widget) {
-            widget.setAttribute('successRedirectUrl', successUrl);
+        // --- FIREWORKS ---
+        const canvas = document.getElementById('fireworksCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
+            window.addEventListener('resize', resize);
+            resize();
+            
+            function loop() {
+                requestAnimationFrame(loop);
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, w, h);
+                ctx.globalCompositeOperation = 'lighter';
+                
+                if(Math.random() < 0.05) {
+                    const x = Math.random() * w;
+                    const y = Math.random() * h * 0.5;
+                    ctx.fillStyle = '#FFD400';
+                    ctx.fillRect(x, y, 3, 3);
+                }
+            }
+            loop();
         }
     </script>
 </body>
