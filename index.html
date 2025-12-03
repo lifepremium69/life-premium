@@ -62,9 +62,10 @@
         .floating-badge { animation: float 5s infinite; filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
         @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-        /* --- MODAL FIXES --- */
-        /* Forces the modal content to have height so Crossmint can render */
-        .crossmint-container { min-height: 650px; display: block; width: 100%; }
+        /* --- MODAL FIXES (Dark Mode) --- */
+        .crossmint-container { min-height: 650px; display: flex; align-items: center; justify-content: center; width: 100%; background: #16181c; }
+        /* Hide Crossmint's white loading flash if possible */
+        crossmint-embedded-collect { width: 100%; height: 100%; }
     </style>
 </head>
 
@@ -73,16 +74,19 @@
     <div id="paymentModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
         <div class="relative w-full max-w-md bg-[#16181c] border border-[#333] rounded-2xl shadow-2xl overflow-hidden">
             
-            <div class="flex justify-between items-center p-4 border-b border-[#333] bg-[#111]">
-                <span class="text-[#FFD400] font-bold tracking-widest uppercase text-sm">Secure Checkout</span>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-white">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white z-30 bg-black/50 rounded-full p-1">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
 
-            <div class="crossmint-container bg-white"> 
+            <div class="crossmint-container relative"> 
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-[#536471] z-0">
+                    <i data-lucide="loader" class="animate-spin w-8 h-8 mb-2 text-[#FFD400]"></i>
+                    <p class="text-sm">Loading Secure Checkout...</p>
+                </div>
+
                 <crossmint-embedded-collect
                     id="crossmint-widget"
+                    className="relative z-10 w-full h-full"
                     clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
                     collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
                     environment="staging"
