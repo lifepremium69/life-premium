@@ -18,14 +18,13 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-        
-      <style>
+
+    <style>
         :root {
             --x-black: #000000;
             --x-card-bg: #16181c;
@@ -34,49 +33,51 @@
             --x-text-dim: #71767b;
             --x-border: #2f3336;
         }
-    
-        /* --- SCROLL SNAP FIX --- */
-        html {
-            /* Set root element to scroll container */
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            /* Ensure it occupies the full viewport height */
-            height: 100%; 
-        }
-    
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--x-black);
-            color: var(--x-text-main);
-            overflow-x: hidden;
+
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            /* Ensure body fills the HTML container */
-            height: 100%; 
+            overflow: hidden; /* Disable scroll on body, force it on wrapper */
+            background-color: var(--x-black);
+            color: var(--x-text-main);
+            font-family: 'Inter', sans-serif;
         }
-    
-        /* --- VISUAL FX --- */
+
+        /* --- THE MAGIC SCROLL WRAPPER --- */
+        .snap-container {
+            height: 100vh;
+            width: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
         .section-group {
             position: relative;
-            height: 100vh; /* 100% of the viewport height */
+            height: 100vh;
             min-height: 600px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            width: 100%;
-            /* Define sections as the snap targets */
-            scroll-snap-align: start; 
+            scroll-snap-align: start;
             scroll-snap-stop: always;
+            overflow: hidden;
         }
-    
-        /* The rest of the custom styles follow */
+
+        /* Footer needs to be snap-aligned too if it's visible */
+        footer {
+            scroll-snap-align: start;
+        }
+
+        /* --- VISUAL FX --- */
         .layer {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             width: 100%; height: 100%;
         }
-    
+
         .layer--content {
             z-index: 10;
             display: flex !important;
@@ -88,10 +89,10 @@
         .layer--content * {
             pointer-events: auto !important;
         }
-    
+
         .layer--bg { z-index: 5; }
         .layer--deep-bg { z-index: 1; }
-    
+
         /* Typography */
         .punchy-content {
             text-align: center;
@@ -102,7 +103,6 @@
             position: relative;
         }
         
-        /* HEADER STYLES */
         .punchy-title {
             font-size: 3rem; 
             line-height: 1.1;
@@ -111,11 +111,11 @@
             text-transform: uppercase;
             margin: 0 0 1.5rem 0;
         }
-    
+
         @media (min-width: 768px) {
             .punchy-title { font-size: 4.5rem; } 
         }
-    
+
         .punchy-subtitle {
             font-size: 1.25rem;
             color: #ddd;
@@ -123,10 +123,9 @@
             font-weight: 300;
             line-height: 1.5;
         }
-    
+
         .highlight { color: var(--x-gold); }
-    
-        /* --- THE GOLD BUTTON --- */
+
         .cta-button {
             display: inline-block;
             padding: 18px 40px;
@@ -144,44 +143,24 @@
             margin-top: 10px;
             border-radius: 9999px;
         }
-    
+
         .cta-button:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
             background-color: #ffe033;
         }
-    
-        /* FX: Orbs & Fireworks */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-        }
-        .orb-1 {
-            width: 300px; height: 300px; background: var(--x-gold);
-            top: 10%; left: 10%; animation: floatOrb 10s infinite ease-in-out;
-        }
-        .orb-2 {
-            width: 500px; height: 500px; background: #800080;
-            bottom: -10%; right: -10%; animation: floatOrb 14s infinite ease-in-out reverse;
-        }
-        @keyframes floatOrb {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-    
+
+        .orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; }
+        .orb-1 { width: 300px; height: 300px; background: var(--x-gold); top: 10%; left: 10%; animation: floatOrb 10s infinite ease-in-out; }
+        .orb-2 { width: 500px; height: 500px; background: #800080; bottom: -10%; right: -10%; animation: floatOrb 14s infinite ease-in-out reverse; }
+        @keyframes floatOrb { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
         #fireworksCanvas { width: 100%; height: 100%; display: block; }
-    
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
-        }
+
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
         .floating-badge { animation: float 5s infinite; }
         .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
-    
-        /* Scroll Down Indicator */
+
         .scroll-down-indicator {
             position: absolute;
             bottom: 30px;
@@ -190,25 +169,20 @@
             z-index: 11;
             color: #FFD400;
             animation: bounce 2s infinite;
+            cursor: pointer;
         }
-    
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
         }
     </style>
 </head>
 
 <body class="antialiased selection:bg-[#FFD400] selection:text-black">
 
-    <main class="w-full">
+    <div class="snap-container">
 
         <div id="section1" class="section-group">
             <div class="layer layer--deep-bg" style="background: radial-gradient(circle at 50% 50%, #1a1a1a, #000);"></div>
@@ -218,7 +192,7 @@
                     <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
                 </div>
             </div>
-            <div class="scroll-down-indicator">
+            <div class="scroll-down-indicator" onclick="document.getElementById('section2').scrollIntoView({behavior: 'smooth'})">
                 <i data-lucide="chevron-down" class="w-10 h-10"></i>
             </div>
         </div>
@@ -234,7 +208,7 @@
                     <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
                 </div>
             </div>
-            <div class="scroll-down-indicator">
+            <div class="scroll-down-indicator" onclick="document.getElementById('section3').scrollIntoView({behavior: 'smooth'})">
                 <i data-lucide="chevron-down" class="w-10 h-10"></i>
             </div>
         </div>
@@ -282,18 +256,15 @@
             </div>
         </div>
 
-    </main>
+        <footer class="py-20 text-center text-gray-600 text-sm border-t border-[#222] bg-[#111]">
+            Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
+            But the certificate is now on-chain, non-transferable, and yours forever.<br>
+            © 2025 Instant Life Corp. Still above the peasants™
+        </footer>
 
-    <footer class="py-20 text-center text-gray-600 text-sm border-t border-[#222] bg-[#111]">
-        Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
-        But the certificate is now on-chain, non-transferable, and yours forever.<br>
-        © 2025 Instant Life Corp. Still above the peasants™
-    </footer>
-
-    <script>
+    </div> <script>
         lucide.createIcons();
 
-        // --- FIREWORKS ANIMATION ENGINE ---
         function initFireworks() {
             const canvas = document.getElementById('fireworksCanvas');
             if (!canvas) return;
