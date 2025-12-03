@@ -24,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-     <style>
+        
+      <style>
         :root {
             --x-black: #000000;
             --x-card-bg: #16181c;
@@ -37,11 +37,11 @@
     
         /* --- SCROLL SNAP FIX --- */
         html {
-            /* Enforce snap behavior on the main canvas */
+            /* Set root element to scroll container */
             scroll-snap-type: y mandatory;
-            /* Temporarily commented out 'scroll-behavior: smooth;' to prevent conflict */
-            /* scroll-behavior: smooth; */
-            overflow-y: scroll; /* Ensure we are actually scrolling the root element */
+            overflow-y: scroll;
+            /* Ensure it occupies the full viewport height */
+            height: 100%; 
         }
     
         body {
@@ -51,19 +51,21 @@
             overflow-x: hidden;
             margin: 0;
             padding: 0;
+            /* Ensure body fills the HTML container */
+            height: 100%; 
         }
     
         /* --- VISUAL FX --- */
         .section-group {
             position: relative;
-            height: 100vh;
+            height: 100vh; /* 100% of the viewport height */
             min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             width: 100%;
-            /* The alignment point for the snapping */
+            /* Define sections as the snap targets */
             scroll-snap-align: start; 
             scroll-snap-stop: always;
         }
@@ -100,6 +102,7 @@
             position: relative;
         }
         
+        /* HEADER STYLES */
         .punchy-title {
             font-size: 3rem; 
             line-height: 1.1;
