@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC59DJ9CPD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NC59DJ9CPD');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Successful | Life Premium™</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --x-black: #000000;
+            --x-card-bg: #16181c;
+            --x-gold: #FFD400;
+            --x-text-main: #e7e9ea;
+            --x-text-dim: #71767b;
+            --x-border: #2f3336;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--x-black);
+            color: var(--x-text-main);
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .layer {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+        }
+
+        .layer--content { z-index: 10; position: relative; text-align: center; }
+        .layer--bg { z-index: 1; }
+
+        .punchy-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            letter-spacing: -3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 0 1.5rem 0;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (min-width: 768px) {
+            .punchy-title { font-size: 5rem; }
+        }
+
+        .punchy-subtitle {
+            font-size: 1.25rem;
+            color: #ddd;
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: transparent;
+            border: 2px solid var(--x-gold);
+            color: var(--x-gold);
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+            border-radius: 9999px;
+        }
+
+        .cta-button:hover {
+            background: var(--x-gold);
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+        }
+
+        #fireworksCanvas { width: 100%; height: 100%; display: block; }
+        .gold-glow { filter: drop-shadow(0 0 30px rgba(255, 212, 0, 0.4)); }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .floating-badge { animation: float 4s ease-in-out infinite; }
+
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#FFD400] selection:text-black">
+
+    <div class="layer layer--bg">
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
+
+    <div class="layer--content p-6">
+        
+        <div class="flex justify-center mb-8 relative">
+            <div class="floating-badge gold-glow">
+                <i data-lucide="check-circle" class="w-24 h-24 text-[#FFD400]"></i>
+            </div>
+        </div>
+
+        <h1 class="punchy-title">Welcome to <br><span style="color:var(--x-gold)">Premium.</span></h1>
+
+        <div class="punchy-subtitle">
+            <p class="font-bold text-white mb-2">Status Upgrade: Confirmed.</p>
+            <p class="text-[#71767b]">We have sent your unique Certificate to your email address. It is yours forever.</p>
+        </div>
+
+        <a href="/" class="cta-button">
+            Return to Homepage
+        </a>
+
+        <p class="mt-8 text-sm text-[#536471]">Check your email for the LemonSqueezy receipt.</p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function initFireworks() {
+            const canvas = document.getElementById('fireworksCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [], fireworks = [];
+            
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Firework {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = height;
+                    this.tx = Math.random() * width;
+                    this.ty = Math.random() * (height * 0.4); 
+                    this.speed = 5;
+                    this.angle = Math.atan2(this.ty - this.y, this.tx - this.x);
+                    this.vx = Math.cos(this.angle) * this.speed;
+                    this.vy = Math.sin(this.angle) * this.speed;
+                }
+                update(i) {
+                    this.x += this.vx; this.y += this.vy;
+                    if (Math.abs(this.tx - this.x) < 5 && Math.abs(this.ty - this.y) < 5) {
+                        createParticles(this.x, this.y);
+                        fireworks.splice(i, 1);
+                    }
+                }
+                draw() { ctx.fillStyle = '#FFD400'; ctx.fillRect(this.x, this.y, 3, 3); }
+            }
+
+            function createParticles(x, y) {
+                for (let i = 0; i < 40; i++) {
+                    particles.push({
+                        x, y,
+                        vx: (Math.random() - 0.5) * 8,
+                        vy: (Math.random() - 0.5) * 8,
+                        alpha: 1,
+                        color: `hsl(${Math.random() * 50 + 40}, 100%, 50%)`
+                    });
+                }
+            }
+
+            function loop() {
+                requestAnimationFrame(loop);
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.globalCompositeOperation = 'lighter';
+
+                if (Math.random() < 0.05) fireworks.push(new Firework());
+
+                fireworks.forEach((f, i) => { f.update(i); f.draw(); });
+                
+                particles.forEach((p, i) => {
+                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.015;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, 2, 2);
+                    if (p.alpha <= 0) particles.splice(i, 1);
+                });
+            }
+            loop();
+        }
+        initFireworks();
+    </script>
+</body>
+</html>
