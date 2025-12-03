@@ -9,227 +9,187 @@
         gtag('js', new Date());
         gtag('config', 'G-NC59DJ9CPD');
     </script>
-
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upgrade Successful | Life Premium™</title>
-    
-    <script async src="https://go.firstpromoter.com/fpr.min.js"></script>
+    <title>Life Premium™ – Instant Life Upgrade</title>
+    <meta name="description" content="Pay once. Life upgraded. Instantly." />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://www.crossmint.com/sdk/embedded-collect.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --x-black: #000000;
-            --x-card-bg: #16181c;
-            --x-gold: #FFD400;
-            --x-text-main: #e7e9ea;
-            --x-text-dim: #71767b;
-            --x-border: #2f3336;
-        }
+        :root { --gold: #FFD400; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
+        html { scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--x-black);
-            color: var(--x-text-main);
-            overflow: hidden; 
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* --- VISUAL FX --- */
-        .layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; }
-        .layer--content { z-index: 10; position: relative; text-align: center; }
-        .layer--bg { z-index: 1; }
-
-        /* Typography matching index.html */
+        /* Typography */
         .punchy-title {
-            font-size: 3rem;
-            line-height: 1.1;
-            letter-spacing: -3px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: 0 0 1.5rem 0;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            font-size: 3rem; line-height: 1.1; letter-spacing: -3px; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem;
         }
-
-        @media (min-width: 768px) {
-            .punchy-title { font-size: 5rem; }
-        }
-
-        .punchy-subtitle {
-            font-size: 1.25rem;
-            color: #ddd;
-            font-weight: 300;
-            line-height: 1.5;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-        }
-
-        /* Gold Button */
-        .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
-            background: transparent;
-            border: 2px solid var(--x-gold);
-            color: var(--x-gold);
-            font-weight: 900;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
-            border-radius: 9999px;
-        }
-
-        .cta-button:hover {
-            background: var(--x-gold);
-            color: #000;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-        }
-
-        /* Animations */
-        #fireworksCanvas { width: 100%; height: 100%; display: block; }
-        .gold-glow { filter: drop-shadow(0 0 30px rgba(255, 212, 0, 0.4)); }
+        @media (min-width: 768px) { .punchy-title { font-size: 5rem; } }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-        .floating-badge { animation: float 4s ease-in-out infinite; }
+        .punchy-subtitle { font-size: 1.25rem; color: #ddd; font-weight: 300; margin-bottom: 2rem; }
 
+        /* Buttons */
+        .cta-button {
+            display: inline-block; padding: 18px 40px; background: var(--gold); color: #000; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 1px; border-radius: 9999px; transition: transform 0.2s;
+            cursor: pointer; border: none;
+        }
+        .cta-button:hover { transform: scale(1.05); background-color: #ffe033; }
+
+        /* Section Layouts */
+        .section-group {
+            height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+        }
+        .punchy-content { text-align: center; z-index: 10; position: relative; max-width: 1000px; padding: 2rem; }
+        
+        /* FX */
+        .glow { text-shadow: 0 0 40px rgba(255,212,0,0.4); }
+        #fireworksCanvas { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: 1; }
+        .orb-1 { width: 300px; height: 300px; background: var(--gold); top: 20%; left: 20%; }
+        .orb-2 { width: 400px; height: 400px; background: #800080; bottom: 20%; right: 20%; }
     </style>
 </head>
 
-<body class="antialiased selection:bg-[#FFD400] selection:text-black">
+<body class="antialiased">
 
-    <div class="layer layer--bg">
-        <canvas id="fireworksCanvas"></canvas>
-    </div>
-
-    <div class="layer--content p-6">
-        
-        <div class="flex justify-center mb-8 relative">
-            <div class="floating-badge gold-glow">
-                <i data-lucide="check-circle" class="w-24 h-24 text-[#FFD400]"></i>
+    <div id="paymentModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 p-4">
+        <div class="relative w-full max-w-md bg-[#111] border border-[#333] rounded-2xl overflow-hidden shadow-2xl p-4">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-white z-20 p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="pt-8 pb-4">
+                <crossmint-embedded-collect
+                    id="crossmint-widget"
+                    clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
+                    collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
+                    environment="production"
+                    price="0.42"
+                    currency="SOL"
+                    paymentMethods='["fiat","sol"]'
+                    emailInput="true"
+                    successRedirectUrl="https://lifepremium.you/thank-you.html"
+                ></crossmint-embedded-collect>
             </div>
         </div>
-
-        <h1 class="punchy-title">Welcome to <br><span style="color:var(--x-gold)">Premium.</span></h1>
-
-        <div class="punchy-subtitle">
-            <p class="font-bold text-white mb-2">Status Upgrade: Confirmed.</p>
-            <p class="text-[#71767b]">Your unique NFT Certificate is being minted and airdropped to your wallet right now. It usually takes 1-2 minutes.</p>
-        </div>
-
-        <a href="/" class="cta-button">
-            Return to Homepage
-        </a>
-
-        <p class="mt-8 text-sm text-[#536471]">Check your email for the Crossmint receipt.</p>
     </div>
 
-    <script>
-        window.$FPROM = window.$FPROM || { cmd: [] };
-        
-        $FPROM.cmd.push(function(api) {
-            const params = new URLSearchParams(window.location.search);
-            const orderId = params.get('orderId'); // Crossmint order ID
-            const refId = params.get('ref_id');   // Affiliate ID we preserved
+    <main>
+        <section id="section1" class="section-group bg-black">
+            <div class="punchy-content">
+                <h1 class="punchy-title glow">Still living<br><span class="text-gray-600">average?</span></h1>
+                <p class="punchy-subtitle animate-pulse">One payment ends that forever.</p>
+            </div>
+            <button onclick="document.getElementById('section2').scrollIntoView({behavior:'smooth'})" 
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#FFD400] animate-bounce z-20">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
+            </button>
+        </section>
 
-            // Fire sale event ONLY if we have confirmation (orderId) and an affiliate ID (refId)
-            if (refId && orderId) {
-                api.trackSale({
-                    sale_amount: 89, 
-                    currency: 'USD',
-                    customer_ref: orderId, // Unique transaction reference
-                    promoter_ref: refId     // Affiliate identifier
-                });
-                console.log(`First Promoter Sale Tracked for affiliate ${refId}`);
-            }
-        });
-    </script>
-    
+        <section id="section2" class="section-group bg-[#050505]">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="punchy-content">
+                <h1 class="punchy-title glow">Upgrade your life<br><span class="highlight">to Premium.</span></h1>
+                <p class="punchy-subtitle">No badge. No approval. Permanently recorded on Solana.</p>
+            </div>
+            <button onclick="document.getElementById('section3').scrollIntoView({behavior:'smooth'})" 
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#FFD400] animate-bounce z-20">
+                <i data-lucide="chevron-down" class="w-10 h-10"></i>
+            </button>
+        </section>
+
+        <section id="section3" class="section-group bg-black relative">
+            <canvas id="fireworksCanvas"></canvas>
+            <div class="punchy-content">
+                <div class="flex justify-center mb-6">
+                    <i data-lucide="crown" class="w-20 h-20 text-[#FFD400] drop-shadow-[0_0_15px_rgba(255,212,0,0.5)]"></i>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">Life Premium™</h2>
+                <h1 class="punchy-title text-white">$89</h1>
+                <div class="text-xl font-bold text-[#FFD400] mb-8 uppercase tracking-widest">ONCE</div>
+
+                <div class="punchy-subtitle">
+                    <p class="font-bold text-white mb-1">Pay Once → Life upgraded forever.</p>
+                    <p class="text-gray-400 text-sm">Includes permanent, non-transferable on-chain certificate.</p>
+                </div>
+
+                <button onclick="openModal()" class="cta-button">
+                    UPGRADE MY LIFE NOW
+                </button>
+
+                <p class="mt-6 text-xs text-gray-500">Valid forever. Non-transferable. Yours only.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 text-center text-gray-600 text-xs bg-[#111] border-t border-[#222]">
+        Life Premium™ is satirical entertainment. No actual life changes guaranteed.<br>
+        But the certificate is now on-chain, non-transferable, and yours forever.<br>
+        © 2025 Instant Life Corp. Still above the peasants™
+    </footer>
+
     <script>
         lucide.createIcons();
 
-        // --- FIREWORKS ANIMATION (Same as Index) ---
-        function initFireworks() {
-            const canvas = document.getElementById('fireworksCanvas');
-            if (!canvas) return;
+        // --- MODAL LOGIC ---
+        function openModal() {
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        // --- AFFILIATE TRACKING LOGIC ---
+        // 1. Get Ref ID
+        const params = new URLSearchParams(window.location.search);
+        const refId = params.get('ref_id');
+        
+        // 2. Build Success URL
+        let successUrl = "https://lifepremium.you/thank-you.html";
+        if (refId) {
+            successUrl += `?ref_id=${refId}`;
+        }
+
+        // 3. Inject into Crossmint Widget
+        const widget = document.getElementById('crossmint-widget');
+        if(widget) {
+            widget.setAttribute('successRedirectUrl', successUrl);
+        }
+
+        // --- FIREWORKS (Simplified) ---
+        const canvas = document.getElementById('fireworksCanvas');
+        if (canvas) {
             const ctx = canvas.getContext('2d');
-            let width, height, particles = [], fireworks = [];
-            
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
+            let w, h;
+            const resize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
             window.addEventListener('resize', resize);
             resize();
-
-            class Firework {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = height;
-                    this.tx = Math.random() * width;
-                    this.ty = Math.random() * (height * 0.4);
-                    this.speed = 5;
-                    this.angle = Math.atan2(this.ty - this.y, this.tx - this.x);
-                    this.vx = Math.cos(this.angle) * this.speed;
-                    this.vy = Math.sin(this.angle) * this.speed;
-                }
-                update(i) {
-                    this.x += this.vx; this.y += this.vy;
-                    if (Math.abs(this.tx - this.x) < 5 && Math.abs(this.ty - this.y) < 5) {
-                        createParticles(this.x, this.y);
-                        fireworks.splice(i, 1);
-                    }
-                }
-                draw() { ctx.fillStyle = '#FFD400'; ctx.fillRect(this.x, this.y, 3, 3); }
-            }
-
-            function createParticles(x, y) {
-                for (let i = 0; i < 40; i++) { 
-                    particles.push({
-                        x, y,
-                        vx: (Math.random() - 0.5) * 8,
-                        vy: (Math.random() - 0.5) * 8,
-                        alpha: 1,
-                        color: `hsl(${Math.random() * 50 + 40}, 100%, 50%)`
-                    });
-                }
-            }
-
+            
             function loop() {
                 requestAnimationFrame(loop);
                 ctx.globalCompositeOperation = 'destination-out';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, w, h);
                 ctx.globalCompositeOperation = 'lighter';
-
-                if (Math.random() < 0.05) fireworks.push(new Firework()); 
-
-                fireworks.forEach((f, i) => { f.update(i); f.draw(); });
                 
-                particles.forEach((p, i) => {
-                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.015;
-                    ctx.globalAlpha = p.alpha;
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(p.x, p.y, 2, 2);
-                    if (p.alpha <= 0) particles.splice(i, 1);
-                });
+                if(Math.random() < 0.05) {
+                    const x = Math.random() * w;
+                    const y = Math.random() * h * 0.5;
+                    ctx.fillStyle = '#FFD400';
+                    ctx.fillRect(x, y, 3, 3);
+                }
             }
             loop();
         }
-        initFireworks();
     </script>
 </body>
 </html>
