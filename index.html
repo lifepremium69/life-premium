@@ -48,37 +48,27 @@
             margin: 0;
             padding: 0;
         }
-
+ 
         /* --- VISUAL FX --- */
         .section-group {
             position: relative;
             height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            width: 100%;
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
+            /* ... */
         }
-
-        .layer {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
-        }
-
+        
         .layer--content {
             z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
+            pointer-events: none; /* The content layer itself ignores clicks */
         }
         
-        .layer--content * {
-            pointer-events: auto;
+        /* FIX: Target the custom Crossmint element and the buttons directly */
+        .layer--content crossmint-embedded-collect,
+        .layer--content .cta-button,
+        .layer--content button {
+            pointer-events: auto !important; /* Forces clicks to be registered */
         }
 
         .layer--bg { z-index: 5; }
