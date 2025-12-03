@@ -24,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <style>
+    
+     <style>
         :root {
             --x-black: #000000;
             --x-card-bg: #16181c;
@@ -34,12 +34,16 @@
             --x-text-dim: #71767b;
             --x-border: #2f3336;
         }
-
+    
+        /* --- SCROLL SNAP FIX --- */
         html {
+            /* Enforce snap behavior on the main canvas */
             scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
+            /* Temporarily commented out 'scroll-behavior: smooth;' to prevent conflict */
+            /* scroll-behavior: smooth; */
+            overflow-y: scroll; /* Ensure we are actually scrolling the root element */
         }
-
+    
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--x-black);
@@ -48,32 +52,44 @@
             margin: 0;
             padding: 0;
         }
- 
+    
         /* --- VISUAL FX --- */
         .section-group {
             position: relative;
             height: 100vh;
-            /* ... */
-        }
-        
-        .layer--content {
-            z-index: 10;
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none; /* The content layer itself ignores clicks */
+            overflow: hidden;
+            width: 100%;
+            /* The alignment point for the snapping */
+            scroll-snap-align: start; 
+            scroll-snap-stop: always;
+        }
+    
+        /* The rest of the custom styles follow */
+        .layer {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+        }
+    
+        .layer--content {
+            z-index: 10;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            pointer-events: none;
         }
         
-        /* FIX: Target the custom Crossmint element and the buttons directly */
-        .layer--content crossmint-embedded-collect,
-        .layer--content .cta-button,
-        .layer--content button {
-            pointer-events: auto !important; /* Forces clicks to be registered */
+        .layer--content * {
+            pointer-events: auto !important;
         }
-
+    
         .layer--bg { z-index: 5; }
         .layer--deep-bg { z-index: 1; }
-
+    
         /* Typography */
         .punchy-content {
             text-align: center;
@@ -84,20 +100,19 @@
             position: relative;
         }
         
-        /* HEADER FIX: Matching text-5xl and md:text-7xl sizes */
         .punchy-title {
-            font-size: 3rem; /* text-5xl equivalent */
+            font-size: 3rem; 
             line-height: 1.1;
             letter-spacing: -3px;
             font-weight: 800;
             text-transform: uppercase;
             margin: 0 0 1.5rem 0;
         }
-
+    
         @media (min-width: 768px) {
-            .punchy-title { font-size: 4.5rem; } /* text-7xl equivalent */
+            .punchy-title { font-size: 4.5rem; } 
         }
-
+    
         .punchy-subtitle {
             font-size: 1.25rem;
             color: #ddd;
@@ -105,9 +120,9 @@
             font-weight: 300;
             line-height: 1.5;
         }
-
+    
         .highlight { color: var(--x-gold); }
-
+    
         /* --- THE GOLD BUTTON --- */
         .cta-button {
             display: inline-block;
@@ -126,13 +141,13 @@
             margin-top: 10px;
             border-radius: 9999px;
         }
-
+    
         .cta-button:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
             background-color: #ffe033;
         }
-
+    
         /* FX: Orbs & Fireworks */
         .orb {
             position: absolute;
@@ -152,9 +167,9 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-
+    
         #fireworksCanvas { width: 100%; height: 100%; display: block; }
-
+    
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
@@ -162,7 +177,7 @@
         }
         .floating-badge { animation: float 5s infinite; }
         .gold-glow { filter: drop-shadow(0 0 20px rgba(255, 212, 0, 0.2)); }
-
+    
         /* Scroll Down Indicator */
         .scroll-down-indicator {
             position: absolute;
@@ -173,7 +188,7 @@
             color: #FFD400;
             animation: bounce 2s infinite;
         }
-
+    
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateX(-50%) translateY(0);
@@ -244,8 +259,8 @@
                     </div>
 
                     <crossmint-embedded-collect
-                        clientId="b9cf4e02-8430-4405-ad13-de4e96304c0c"
-                        collectionId="0134fb3e-e84d-4b7b-b28a-8355b9accc6c"
+                        clientId="d9f777e8-1cdc-42f3-81e3-86249f7ac47b"
+                        collectionId="2573e28c-fed8-4d13-a574-7920cfe9c43b"
                         environment="production"
                         price="0.42"
                         currency="SOL"
