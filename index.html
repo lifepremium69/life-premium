@@ -334,5 +334,30 @@
         }
         initFireworks();
     </script>
+    <script>
+    // --- AFFILIATE TRACKING SETUP: Preserving ref_id through checkout ---
+    
+    // 1. Get the affiliate ID (ref_id) from the URL if present
+    const params = new URLSearchParams(window.location.search);
+    const refId = params.get('ref_id'); 
+
+    // 2. Define the base success URL (Must be the full URL)
+    let redirectUrl = "https://lifepremium.you/thank-you.html";
+    
+    // 3. If an affiliate ID is found, append it to the redirect URL
+    if (refId) {
+        // We ensure ref_id is added to the URL parameters
+        redirectUrl += (redirectUrl.includes('?') ? '&' : '?') + `ref_id=${refId}`;
+    }
+
+    // 4. Find all Crossmint elements and set the dynamic redirect URL
+    document.addEventListener('DOMContentLoaded', () => {
+        const crossmintButtons = document.querySelectorAll('crossmint-embedded-collect');
+        crossmintButtons.forEach(button => {
+            // This overwrites the static URL in the HTML, ensuring the ref_id is carried over
+            button.setAttribute('successRedirectUrl', redirectUrl);
+        });
+    });
+</script>
 </body>
 </html>
