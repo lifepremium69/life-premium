@@ -7,13 +7,14 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-NC59DJ9CPD');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upgrade Successful | Life Premium™</title>
+    
+    <script async src="https://go.firstpromoter.com/fpr.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -33,7 +34,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--x-black);
             color: var(--x-text-main);
-            overflow: hidden; /* No scrolling needed here */
+            overflow: hidden; 
             height: 100vh;
             margin: 0;
             display: flex;
@@ -42,12 +43,7 @@
         }
 
         /* --- VISUAL FX --- */
-        .layer {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
-        }
-
+        .layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; }
         .layer--content { z-index: 10; position: relative; text-align: center; }
         .layer--bg { z-index: 1; }
 
@@ -142,6 +138,27 @@
     </div>
 
     <script>
+        window.$FPROM = window.$FPROM || { cmd: [] };
+        
+        $FPROM.cmd.push(function(api) {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('orderId'); // Crossmint order ID
+            const refId = params.get('ref_id');   // Affiliate ID we preserved
+
+            // Fire sale event ONLY if we have confirmation (orderId) and an affiliate ID (refId)
+            if (refId && orderId) {
+                api.trackSale({
+                    sale_amount: 89, 
+                    currency: 'USD',
+                    customer_ref: orderId, // Unique transaction reference
+                    promoter_ref: refId     // Affiliate identifier
+                });
+                console.log(`First Promoter Sale Tracked for affiliate ${refId}`);
+            }
+        });
+    </script>
+    
+    <script>
         lucide.createIcons();
 
         // --- FIREWORKS ANIMATION (Same as Index) ---
@@ -163,7 +180,7 @@
                     this.x = Math.random() * width;
                     this.y = height;
                     this.tx = Math.random() * width;
-                    this.ty = Math.random() * (height * 0.4); // Explode higher up
+                    this.ty = Math.random() * (height * 0.4);
                     this.speed = 5;
                     this.angle = Math.atan2(this.ty - this.y, this.tx - this.x);
                     this.vx = Math.cos(this.angle) * this.speed;
@@ -180,7 +197,7 @@
             }
 
             function createParticles(x, y) {
-                for (let i = 0; i < 40; i++) { // More particles for celebration
+                for (let i = 0; i < 40; i++) { 
                     particles.push({
                         x, y,
                         vx: (Math.random() - 0.5) * 8,
@@ -198,7 +215,7 @@
                 ctx.fillRect(0, 0, width, height);
                 ctx.globalCompositeOperation = 'lighter';
 
-                if (Math.random() < 0.05) fireworks.push(new Firework()); // More frequent fireworks
+                if (Math.random() < 0.05) fireworks.push(new Firework()); 
 
                 fireworks.forEach((f, i) => { f.update(i); f.draw(); });
                 
