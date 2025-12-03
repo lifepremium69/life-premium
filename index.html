@@ -164,7 +164,7 @@
     <script>
         lucide.createIcons();
 
-        // --- MODAL & TRACKING LOGIC ---
+// --- MODAL & TRACKING LOGIC ---
         function openModal() {
             const modal = document.getElementById('paymentModal');
             modal.classList.remove('hidden');
@@ -177,25 +177,26 @@
             let successUrl = "https://lifepremium.you/thank-you";
             if (refId) successUrl += `?ref_id=${refId}`;
 
-            // 3. FORCE RE-RENDER (Critical Fix for Stuck Loading)
+            // 3. FORCE RE-RENDER (Clean Slate)
             const mountPoint = document.getElementById('widget-mount-point');
-            // Remove old widget if it exists to ensure fresh load
             const existing = mountPoint.querySelector('crossmint-embedded-collect');
             if(existing) existing.remove();
 
-            // Create new widget
+            // 4. Create Minimal Widget (Auto-detects price/currency)
             const widget = document.createElement('crossmint-embedded-collect');
             widget.className = "relative z-10 w-full h-full";
             
-            // --- YOUR PRODUCTION IDs ---
+            // --- IDS ---
             widget.setAttribute('clientId', 'd9f777e8-1cdc-42f3-81e3-86249f7ac47b');
             widget.setAttribute('collectionId', '2573e28c-fed8-4d13-a574-7920cfe9c43b');
             
-            // --- SET TO PRODUCTION ---
+            // --- ENV ---
             widget.setAttribute('environment', 'production');
             
-            widget.setAttribute('price', '0.42');
-            widget.setAttribute('currency', 'SOL');
+            // --- REMOVED PRICE/CURRENCY CONSTRAINTS TO FIX LOADING ---
+            // widget.setAttribute('price', '0.42');  <-- Removing this lets Crossmint decide
+            // widget.setAttribute('currency', 'SOL'); <-- Removing this too
+            
             widget.setAttribute('paymentMethods', '["fiat","sol"]');
             widget.setAttribute('emailInput', 'true');
             widget.setAttribute('successRedirectUrl', successUrl);
